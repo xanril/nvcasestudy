@@ -6,10 +6,7 @@ namespace CaseStudy.Models
     {
         private const int MAX_AIRLINE_CODE_LENGTH = 2;
 
-        public int ID
-        {
-            get; internal set;
-        }
+        public int ID { get; private set; }
 
         // Required
         // Alphanumeric 
@@ -18,6 +15,7 @@ namespace CaseStudy.Models
         // Exactly 2 characters
         // Possible to extend to 3 chars max
         public string AirlineCode;
+        public string AirlineCode { get; set; }
 
         // Required
         // Numeric
