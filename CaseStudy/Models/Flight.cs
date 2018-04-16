@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace CaseStudy.Models
 {
@@ -8,13 +9,10 @@ namespace CaseStudy.Models
 
         public int ID { get; private set; }
 
-        // Required
-        // Alphanumeric 
-        // If first character is a digit, second character should be a letter 
-        // Cannot be both numbers 
-        // Exactly 2 characters
         // Possible to extend to 3 chars max
-        public string AirlineCode;
+        [Required(ErrorMessage = "Airline Code cannot be null.")]
+        [StringLength(2, MinimumLength = 2, ErrorMessage = "Airline Code should be exactly 2 alphanumeric characters.")]
+        [RegularExpression("[A-Z,a-z][0-9]|[0-9][A-Z,a-z]|[A-Z,a-z][A-Z,a-z]", ErrorMessage = "Airline Code cannot be both numbers.")]
         public string AirlineCode { get; set; }
 
         // Required
