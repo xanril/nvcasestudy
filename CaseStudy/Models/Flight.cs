@@ -59,17 +59,6 @@ namespace CaseStudy.Models
             return ScheduledTimeDeparture.ToShortTimeString() + " - " + ScheduledTimeArrival.ToShortTimeString();
         }
 
-        public void SetAirlineCode(string airlineCode)
-        {
-            if (airlineCode.Length > MAX_AIRLINE_CODE_LENGTH)
-            {
-                throw new Exception("Airline Code should not exceed max length of " + MAX_AIRLINE_CODE_LENGTH);
-            }
-
-
-            //_airlineCode = airlineCode;
-        }
-
         public void PrintInfo()
         {
             string infoString = GetFlightDesignator() + "\t" + GetMarket() + "   " + GetSchedule();
