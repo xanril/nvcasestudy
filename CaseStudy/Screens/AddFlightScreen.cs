@@ -30,6 +30,7 @@ namespace CaseStudy.Screens
         {
             userInput = userInput.ToUpper();
             userInput = userInput.Trim();
+
             if (userInput == "X")
             {
                 Console.WriteLine("Back To Menu selected.\n");
@@ -37,10 +38,20 @@ namespace CaseStudy.Screens
                 return;
             }
 
-            if(string.IsNullOrEmpty(userInput))
+            List<ValidationResult> validationResults = new List<ValidationResult>();
+            ValidationContext validationContext = new ValidationContext(newFlight, null, null) { MemberName = "AirlineCode" };
+            bool isValid = Validator.TryValidateProperty(userInput, validationContext, validationResults);
+
+            if(isValid)
             {
-                Console.WriteLine("Airline Code cannot be empty.");
-                return;
+                newFlight.AirlineCode = userInput;
+            }
+            else
+            {
+                foreach(ValidationResult result in validationResults)
+                {
+                    Console.WriteLine(result.ErrorMessage);
+                }
             }
         }
     }
