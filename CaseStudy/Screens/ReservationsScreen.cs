@@ -46,7 +46,7 @@ namespace CaseStudy.Screens
                     break;
 
                 case MENU_SEARCH_PNR:
-                    Console.WriteLine("List All Reservations selected.\n");
+                    Console.WriteLine("Search By PNR selected.\n");
                     ScreenManager.GetInstance().PushScreen(new SearchPNRScreen());
                     break;
 
