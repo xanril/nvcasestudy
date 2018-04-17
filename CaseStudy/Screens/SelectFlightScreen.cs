@@ -25,7 +25,7 @@ namespace CaseStudy.Screens
         public void ShowInputPrompt()
         {
             Console.WriteLine("");
-            Console.Write("Enter Airline Code and Flight Number (XX-XXXX): ");
+            Console.Write("Enter Airline Code and Flight Number (XX YYYY): ");
         }
 
         public void ProcessInput(string userInput)
@@ -40,7 +40,7 @@ namespace CaseStudy.Screens
                 return;
             }
 
-            string[] arrInputs = userInput.Split('-');
+            string[] arrInputs = userInput.Split(' ');
             if(arrInputs.Length < 2)
             {
                 Console.WriteLine("Invalid Flight Designator format. Please try again.");
@@ -59,11 +59,12 @@ namespace CaseStudy.Screens
                     flight.PrintInfo();
                     Console.WriteLine("");
 
-                    ScreenManager.GetInstance().PopScreenUntilTargetType(typeof(ReservationsScreen));
+                    reservation.flight = flight;
+                    ScreenManager.GetInstance().PushScreen(new SetFlightPassengersScreen(reservation));
                 }
                 else
                 {
-                    Console.WriteLine("Flight record does not exist.");
+                    Console.WriteLine("Flight record does not exist.\n");
                     ScreenManager.GetInstance().PopScreenUntilTargetType(typeof(ReservationsScreen));
                 }
             }
