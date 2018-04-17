@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CaseStudy.Screens
 {
@@ -47,7 +44,6 @@ namespace CaseStudy.Screens
 
             if (isValid == false)
             {
-                // error validating. Print error messages
                 foreach (ValidationResult result in validationResults)
                 {
                     Console.WriteLine(result.ErrorMessage);
@@ -64,7 +60,7 @@ namespace CaseStudy.Screens
                 {
                     flight.DepartureStation = userInput;
                     Console.WriteLine("Departure Station is now '" + flight.DepartureStation + "'\n");
-                    //ScreenManager.GetInstance().PushScreen(new SetFlightNumberScreen(flight));
+                    ScreenManager.GetInstance().PushScreen(new SetArrivalStationScreen(flight));
                 }
             }
         }
