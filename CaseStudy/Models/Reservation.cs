@@ -1,6 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
+using CaseStudy.Helpers;
+using System;
 
 namespace CaseStudy.Models
 {
@@ -17,7 +19,25 @@ namespace CaseStudy.Models
 
         public string PNRNumber
         {
-            get; internal set;
+            get; private set;
+        }
+
+        private int passengerCount;
+
+        [Range(1, 5, ErrorMessage = "Passenger count should be at least 1 to maximum of 5")]
+        public int PassengerCount
+        {
+            get { return passengerCount; }
+            set
+            {
+                ValidationHelperResult validationResult = ValidationHelper.ValidateProperty<Reservation>(this, nameof(PassengerCount), value);
+                if(validationResult.IsValid)
+                {
+                    throw new Exception(validationResult.GetErrorMessages());
+                }
+
+                passengerCount = value;
+            }
         }
 
         public Reservation()
