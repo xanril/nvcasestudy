@@ -13,7 +13,7 @@ namespace CaseStudy.Screens
 
         public void Display()
         {
-            Console.WriteLine("RESERVATIONS > LIST RESERVATIONS");
+            Console.WriteLine("RESERVATIONS > SEARCH BY PNR");
         }
 
         public void ShowInputPrompt()
@@ -34,7 +34,6 @@ namespace CaseStudy.Screens
                 return;
             }
 
-            userInput = userInput.ToLower();
             Reservation reservation = DataManager.GetInstance().FindReservation(userInput);
             
             if(reservation == null)
