@@ -69,6 +69,7 @@
     <Compile Include="Screens\SearchFlightNumberScreen.cs" />
     <Compile Include="Screens\SearchFlightScreen.cs" />
     <Compile Include="Screens\SearchMarketScreen.cs" />
+    <Compile Include="Screens\SetFlightPassengersScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
