@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CaseStudy.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,7 +41,8 @@ namespace CaseStudy.Screens
 
                 case MENU_LIST_RESERVATIONS:
                     Console.WriteLine("List All Reservations selected.\n");
-                    ScreenManager.GetInstance().PushScreen(new ListReservationsScreen());
+                    ListReservationsScreen listReservationsScreen = new ListReservationsScreen(DataManager.GetInstance().Reservations);
+                    ScreenManager.GetInstance().PushScreen(listReservationsScreen);
                     break;
 
                 case MENU_SEARCH_PNR:
