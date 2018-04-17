@@ -17,7 +17,7 @@ namespace CaseStudy.Screens
 
         public void Display()
         {
-            Console.WriteLine("FLIGHT MAINTENANCE > ADD FLIGHT");
+            Console.WriteLine("FLIGHT MAINTENANCE > ADD FLIGHT > SET AIRLINE CODE");
         }
 
         public void ShowInputPrompt()
