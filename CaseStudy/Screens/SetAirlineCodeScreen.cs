@@ -9,10 +9,9 @@ namespace CaseStudy.Screens
     {
         private Flight newFlight;
 
-        public SetAirlineCodeScreen()
+        public SetAirlineCodeScreen(Flight flight)
         {
-            int nextFlightID = DataManager.GetInstance().GetNextAvailableFlightID();
-            newFlight = new Flight(nextFlightID);
+            this.newFlight = flight;
         }
 
         public void Display()
