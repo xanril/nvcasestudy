@@ -100,11 +100,6 @@ namespace CaseStudy.Models
             return this.stations.ToArray();
         }
 
-        public int GetNextAvailableFlightID()
-        {
-            return this._lastFlightID + 1;
-        }
-
         public bool HasDuplicateFlight(Flight flight)
         {
             Flight dupFlight = this.flights.Find(m => m.AirlineCode == flight.AirlineCode
