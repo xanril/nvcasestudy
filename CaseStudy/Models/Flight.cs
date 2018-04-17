@@ -20,11 +20,13 @@ namespace CaseStudy.Models
         public int FlightNumber { get; set; }
 
         [Required(ErrorMessage = "Arrival Station should have a value.")]
-        // 3 chars, fixed
+        [StringLength(3, MinimumLength = 3, ErrorMessage ="Arrival Station should have 3-character length.")]
+        // TODO: add regex to accept alpha chars only?
         public string ArrivalStation { get; set; }
 
         [Required(ErrorMessage = "Departure Station should have a value.")]
-        // 3 chars fixed
+        [StringLength(3, MinimumLength = 3, ErrorMessage = "Departure Station should have 3-character length.")]
+        // TODO: add regex to accept alpha chars only?
         public string  DepartureStation { get; set; }
 
         // Required
