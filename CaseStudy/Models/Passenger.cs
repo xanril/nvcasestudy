@@ -1,33 +1,70 @@
-﻿using System;
+﻿using CaseStudy.Helpers;
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace CaseStudy.Models
 {
     class Passenger
     {
-        public int ID
+        private string firstName;
+
+        [Required]
+        [StringLength(64, ErrorMessage = "First Name should have 64 characters maximum only.")]
+        public string FirstName
         {
-            get; internal set;
+            get { return firstName; }
+            set
+            {
+                ValidationHelperResult validationResult = ValidationHelper.ValidateProperty<Passenger>(this, nameof(FirstName), value);
+                if (validationResult.IsValid)
+                    throw new Exception(validationResult.GetErrorMessages());
+
+                firstName = value;
+            }
         }
 
-        // Max: 64 chars
-        public string FirstName;
+        private string lastName;
 
-        // Max: 64 chars
-        public string LastName;
+        [Required]
+        [StringLength(64, ErrorMessage = "Last Name should have 64 characters maximum only.")]
+        public string LastName
+        {
+            get { return lastName; }
+            set
+            {
+                ValidationHelperResult validationResult = ValidationHelper.ValidateProperty<Passenger>(this, nameof(LastName), value);
+                if (validationResult.IsValid)
+                    throw new Exception(validationResult.GetErrorMessages());
+
+                lastName = value;
+            }
+        }
 
         // Should not be a future date
-        public DateTime Birthday;
-
-        // Automatically compute
-        public int Age
+        private DateTime birthday;
+        public DateTime Birthday
         {
-            get; internal set;
+            get { return birthday; }
+            set
+            {
+                birthday = value;
+                //TODO: calculate age here
+            }
         }
 
-        public Passenger(int id)
+        // Automatically compute
+        private int age;
+        public int Age
         {
-            this.ID = id;
+            get { return age; }
+        }
+
+        public Passenger()
+        {
+            firstName = "A";
+            LastName = "B";
+            age = 1;
         }
 
         public string GetInfo()

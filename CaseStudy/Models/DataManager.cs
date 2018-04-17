@@ -72,11 +72,13 @@ namespace CaseStudy.Models
             reservation.flight.FlightNumber = flights[0].FlightNumber;
             reservation.flight.ArrivalStation = flights[0].ArrivalStation;
             reservation.flight.DepartureStation = flights[0].DepartureStation;
-            Passenger passenger = new Passenger(0);
+            Passenger passenger = new Passenger();
             passenger.FirstName = "Tony";
             passenger.LastName = "Stark";
             string birthdateString = "5/29/1970 0:00:00 AM";
-            DateTime.TryParse(birthdateString, out passenger.Birthday);
+            DateTime parsedBirthdate;
+            DateTime.TryParse(birthdateString, out parsedBirthdate);
+            passenger.Birthday = parsedBirthdate;
             reservation.AddPassenger(passenger);
             reservations.Add(reservation);
 
@@ -86,11 +88,12 @@ namespace CaseStudy.Models
             reservation.flight.FlightNumber = flights[1].FlightNumber;
             reservation.flight.ArrivalStation = flights[1].ArrivalStation;
             reservation.flight.DepartureStation = flights[1].DepartureStation;
-            passenger = new Passenger(0);
+            passenger = new Passenger();
             passenger.FirstName = "Steve";
             passenger.LastName = "Rogers";
             birthdateString = "7/4/1970 0:00:00 AM";
-            DateTime.TryParse(birthdateString, out passenger.Birthday);
+            DateTime.TryParse(birthdateString, out parsedBirthdate);
+            passenger.Birthday = parsedBirthdate;
             reservation.AddPassenger(passenger);
             reservations.Add(reservation);
         }
