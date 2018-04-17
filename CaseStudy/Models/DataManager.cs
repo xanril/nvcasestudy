@@ -133,5 +133,13 @@ namespace CaseStudy.Models
 
             return false;
         }
+
+        public Flight CreateFlight()
+        {
+            int nextFlightID = GetNextAvailableFlightID();
+            Flight newFlight = new Flight(nextFlightID);
+
+            return newFlight;
+        }
     }
 }
