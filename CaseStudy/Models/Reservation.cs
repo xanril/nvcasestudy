@@ -9,7 +9,12 @@ namespace CaseStudy.Models
         public Flight flight;
 
         // Max 5 per booking
-        public List<Passenger> Passengers;
+        private List<Passenger> passengers;
+        public IEnumerable<Passenger> Passengers
+        {
+            get { return passengers; }
+        }
+
         public string PNRNumber
         {
             get; internal set;
