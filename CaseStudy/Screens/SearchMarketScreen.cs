@@ -34,7 +34,7 @@ namespace CaseStudy.Screens
                 return;
             }
 
-            List<Flight> resultFlights = _flights.FindAll(m => m.ArrivalStation.Code == userInput || m.DepartureStation.Code == userInput);
+            List<Flight> resultFlights = _flights.FindAll(m => m.ArrivalStation == userInput || m.DepartureStation == userInput);
             if (resultFlights == null || resultFlights.Count == 0)
             {
                 Console.WriteLine("No flight record found.");

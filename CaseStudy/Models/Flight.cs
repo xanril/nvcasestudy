@@ -50,7 +50,7 @@ namespace CaseStudy.Models
 
         public string GetMarket()
         {
-            return DepartureStation.Code + "-" + ArrivalStation.Code;
+            return DepartureStation + "-" + ArrivalStation;
         }
 
         public string GetSchedule()
