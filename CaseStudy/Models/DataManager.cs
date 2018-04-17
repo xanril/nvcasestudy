@@ -119,7 +119,7 @@ namespace CaseStudy.Models
             return this._stations.ToArray();
         }
 
-        public int GetNextAvailableFlightID()
+        private int GetNextAvailableFlightID()
         {
             return this._lastFlightID + 1;
         }
