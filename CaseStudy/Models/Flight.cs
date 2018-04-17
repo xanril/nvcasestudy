@@ -41,6 +41,10 @@ namespace CaseStudy.Models
         {
             this.ID = id;
 
+            // initial values
+            this.AirlineCode = "A1";
+            this.FlightNumber = 1;
+
             // set temp Scheduled time of departure and arrival
             DateTime tempDateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
             this.ScheduledTimeDeparture = tempDateTime.AddDays(1).AddHours(10);
