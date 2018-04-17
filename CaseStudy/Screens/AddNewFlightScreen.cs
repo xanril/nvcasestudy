@@ -6,12 +6,10 @@ namespace CaseStudy.Screens
     class AddNewFlightScreen : IScreen
     {
         private Flight flight;
-        private bool isSuccess;
 
         public AddNewFlightScreen(Flight flight)
         {
             this.flight = flight;
-            this.isSuccess = false;
         }
 
         public void Display()
@@ -21,17 +19,14 @@ namespace CaseStudy.Screens
             try
             {
                 DataManager.GetInstance().AddFlight(flight);
-                isSuccess = true;
 
                 Console.WriteLine("New Flight added.");
                 flight.PrintInfo();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error adding new flight.");
+                Console.WriteLine("Error adding new flight. Please try again.");
                 Console.WriteLine(ex.Message);
-
-                isSuccess = false;
             }
         }
 
@@ -43,8 +38,7 @@ namespace CaseStudy.Screens
 
         public void ProcessInput(string userInput)
         {
-            // Popup screens until Flight Maintenance Screen
-            ScreenManager.GetInstance().PopScreenUntilTargetType(typeof(ScreenManager));
+            ScreenManager.GetInstance().PopScreenUntilTargetType(typeof(FlightMaintenanceScreen));
         }
     }
 }
