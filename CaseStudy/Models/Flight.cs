@@ -17,7 +17,7 @@ namespace CaseStudy.Models
 
         // Required
         [Range(minimum:1, maximum:9999, ErrorMessage = "Flight Number should be between the range of 1 to 9999")]
-        public int FlightNumber;
+        public int FlightNumber { get; set; }
 
         // Required
         public Station ArrivalStation;
