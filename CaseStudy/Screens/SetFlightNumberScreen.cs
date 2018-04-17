@@ -7,7 +7,7 @@ namespace CaseStudy.Screens
 {
     class SetFlightNumberScreen : IScreen
     {
-        private const string KEY_BACK_TO_MENU = "X";
+        private static readonly string KEY_BACK_TO_MENU = "X";
         private Flight newFlight;
 
         public SetFlightNumberScreen(Flight flight)
