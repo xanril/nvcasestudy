@@ -77,7 +77,7 @@ namespace CaseStudy.Models
             passenger.LastName = "Stark";
             string birthdateString = "5/29/1970 0:00:00 AM";
             DateTime.TryParse(birthdateString, out passenger.Birthday);
-            reservation.Passengers.Add(passenger);
+            reservation.AddPassenger(passenger);
             reservations.Add(reservation);
 
             reservation = new Reservation();
@@ -91,7 +91,7 @@ namespace CaseStudy.Models
             passenger.LastName = "Rogers";
             birthdateString = "7/4/1970 0:00:00 AM";
             DateTime.TryParse(birthdateString, out passenger.Birthday);
-            reservation.Passengers.Add(passenger);
+            reservation.AddPassenger(passenger);
             reservations.Add(reservation);
         }
 

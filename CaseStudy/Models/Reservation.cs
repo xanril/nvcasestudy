@@ -22,9 +22,14 @@ namespace CaseStudy.Models
 
         public Reservation()
         {
-            this.Passengers = new List<Passenger>();
+            this.passengers = new List<Passenger>();
 
             this.PNRNumber = "generate pls";
+        }
+
+        public void AddPassenger(Passenger passenger)
+        {
+            passengers.Add(passenger);
         }
 
         public string GetInfo()
