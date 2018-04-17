@@ -32,7 +32,7 @@ namespace CaseStudy.Screens
             {
                 case MENU_ADD_FLIGHT:
                     Console.WriteLine("Add Flight selected.\n");
-                    ScreenManager.GetInstance().PushScreen(new AddFlightScreen());
+                    ScreenManager.GetInstance().PushScreen(new SetAirlineCodeScreen());
                     break;
 
                 case MENU_SEARCH_FLIGHT:

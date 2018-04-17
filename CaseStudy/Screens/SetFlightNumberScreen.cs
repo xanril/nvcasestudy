@@ -5,12 +5,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CaseStudy.Screens
 {
-    class AddFlightNumberScreen : IScreen
+    class SetFlightNumberScreen : IScreen
     {
         private const string KEY_BACK_TO_MENU = "X";
         private Flight newFlight;
 
-        public AddFlightNumberScreen(Flight flight)
+        public SetFlightNumberScreen(Flight flight)
         {
             this.newFlight = flight;
         }

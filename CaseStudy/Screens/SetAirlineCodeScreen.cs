@@ -5,11 +5,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CaseStudy.Screens
 {
-    class AddFlightScreen : IScreen
+    class SetAirlineCodeScreen : IScreen
     {
         private Flight newFlight;
 
-        public AddFlightScreen()
+        public SetAirlineCodeScreen()
         {
             int nextFlightID = DataManager.GetInstance().GetNextAvailableFlightID();
             newFlight = new Flight(nextFlightID);
@@ -46,7 +46,7 @@ namespace CaseStudy.Screens
             {
                 newFlight.AirlineCode = userInput;
                 Console.WriteLine("Airline Code is now '" + newFlight.AirlineCode + "'\n");
-                ScreenManager.GetInstance().PushScreen(new AddFlightNumberScreen(newFlight));
+                ScreenManager.GetInstance().PushScreen(new SetFlightNumberScreen(newFlight));
             }
             else
             {
