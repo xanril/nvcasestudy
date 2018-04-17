@@ -55,6 +55,7 @@
     <Compile Include="Screens\ListReservationsScreen.cs" />
     <Compile Include="Screens\ReservationsScreen.cs" />
     <Compile Include="Screens\SearchPNRScreen.cs" />
+    <Compile Include="Screens\SelectFlightScreen.cs" />
     <Compile Include="Screens\SetArrivalStationScreen.cs" />
     <Compile Include="Screens\SetDepartureStationScreen.cs" />
     <Compile Include="Screens\SetFlightNumberScreen.cs" />
