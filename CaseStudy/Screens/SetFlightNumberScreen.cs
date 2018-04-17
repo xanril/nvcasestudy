@@ -54,7 +54,8 @@ namespace CaseStudy.Screens
                     bool hasDuplicateFlight = DataManager.GetInstance().HasDuplicateFlight(newFlight);
                     if(hasDuplicateFlight == false)
                     {
-                        // Flight is valid
+                        Console.WriteLine("Flight Number is now '" + newFlight.FlightNumber + "'\n");
+                        ScreenManager.GetInstance().PushScreen(new SetDepartureStationScreen(newFlight));
                     }
                     else
                     {
