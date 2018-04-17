@@ -29,6 +29,7 @@ namespace CaseStudy.Screens
         public void ProcessInput(string userInput)
         {
             userInput = userInput.Trim();
+            userInput = userInput.ToUpper();
 
             if (userInput == KEY_BACK_TO_MENU)
             {
