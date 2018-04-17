@@ -20,10 +20,10 @@ namespace CaseStudy.Models
         public int FlightNumber { get; set; }
 
         // Required
-        public Station ArrivalStation;
+        public string ArrivalStation { get; set; }
 
         // Required
-        public Station DepartureStation;
+        public string  DepartureStation { get; set; }
 
         // Required
         // Valid Time, 24-hour format
