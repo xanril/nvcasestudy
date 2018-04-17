@@ -22,6 +22,11 @@ namespace CaseStudy.Models
         private List<Reservation> reservations;
         private List<Station> stations;
 
+        public IEnumerable<Reservation> Reservations
+        {
+            get { return reservations; }
+        }
+
         private DataManager()
         {
             flights = new List<Flight>();
