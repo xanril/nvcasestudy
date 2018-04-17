@@ -5,11 +5,6 @@ namespace CaseStudy.Models
 {
     class Reservation
     {
-        public int ID
-        {
-            get; internal set;
-        }
-
         public Flight flight;
 
         // Max 5 per booking
@@ -21,7 +16,6 @@ namespace CaseStudy.Models
 
         public Reservation(int id)
         {
-            this.ID = id;
             this.Passengers = new List<Passenger>();
 
             this.PNRNumber = "generate pls";

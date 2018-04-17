@@ -21,7 +21,6 @@ namespace CaseStudy.Models
         private List<Flight> flights;
         private List<Reservation> reservations;
         private List<Station> stations;
-        private int _lastFlightID = -1;
 
         private DataManager()
         {
@@ -62,8 +61,7 @@ namespace CaseStudy.Models
 
         private void CreateDummyReservations()
         {
-            int currentID = 1;
-            Reservation reservation = new Reservation(currentID);
+            Reservation reservation = new Reservation();
             reservation.flight = new Flight();
             reservation.flight.AirlineCode = flights[0].AirlineCode;
             reservation.flight.FlightNumber = flights[0].FlightNumber;
@@ -77,8 +75,7 @@ namespace CaseStudy.Models
             reservation.Passengers.Add(passenger);
             reservations.Add(reservation);
 
-            currentID = this.reservations.Count + 1;
-            reservation = new Reservation(currentID);
+            reservation = new Reservation();
             reservation.flight = new Flight();
             reservation.flight.AirlineCode = flights[1].AirlineCode;
             reservation.flight.FlightNumber = flights[1].FlightNumber;
