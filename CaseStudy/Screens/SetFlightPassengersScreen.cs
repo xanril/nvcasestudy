@@ -18,12 +18,14 @@ namespace CaseStudy.Screens
         }
 
         private Reservation reservation;
+        private Passenger passenger;
         private SetPassengerStates currState = SetPassengerStates.StateMaxCount;
         
 
         public SetFlightPassengersScreen(Reservation reservation)
         {
             this.reservation = reservation;
+            passenger = new Passenger();
         }
 
         public void Display()
@@ -41,6 +43,10 @@ namespace CaseStudy.Screens
 
                 case SetPassengerStates.StateFirstName:
                     Console.Write("First Name: ");
+                    break;
+
+                case SetPassengerStates.StateLastName:
+                    Console.Write("Last Name: ");
                     break;
             }
         }
@@ -67,7 +73,28 @@ namespace CaseStudy.Screens
                    break;
 
                 case SetPassengerStates.StateFirstName:
-                    
+
+                    try
+                    {
+                        passenger.FirstName = userInput;
+                        currState = SetPassengerStates.StateLastName;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                    break;
+
+                case SetPassengerStates.StateLastName:
+                    try
+                    {
+                        passenger.LastName = userInput;
+                        currState = SetPassengerStates.StateBirthday;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                     break;
             }
         }
