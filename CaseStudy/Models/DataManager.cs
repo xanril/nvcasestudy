@@ -131,5 +131,11 @@ namespace CaseStudy.Models
             this.flights.Add(flight);
             return true;
         }
+
+        public Reservation CreateReservation()
+        {
+            Reservation reservation = new Reservation(0);
+            return reservation;
+        }
     }
 }
