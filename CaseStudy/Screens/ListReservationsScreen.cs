@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CaseStudy.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,19 +9,39 @@ namespace CaseStudy.Screens
 {
     class ListReservationsScreen : IScreen
     {
-        public void Display()
+        private IEnumerable<Reservation> reservations;
+
+        public ListReservationsScreen(IEnumerable<Reservation> reservations)
         {
-            throw new NotImplementedException();
+            this.reservations = reservations;
         }
 
-        public void ProcessInput(string userInput)
+        public void Display()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("RESERVATIONS > LIST RESERVATIONS");
+            Console.WriteLine("");
+
+            if (this.reservations.Count<Reservation>() == 0)
+            {
+                Console.WriteLine("No Reservation records found.\n");
+            }
+            else
+            {
+                foreach(Reservation reservation in reservations)
+                {
+                    Console.WriteLine(reservation.GetInfo());
+                }
+            }
         }
 
         public void ShowInputPrompt()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Press any key to continue.");
+        }
+
+        public void ProcessInput(string userInput)
+        {
+            ScreenManager.GetInstance().PopScreenUntilTargetType(typeof(ReservationsScreen));
         }
     }
 }
