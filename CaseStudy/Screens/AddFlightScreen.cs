@@ -45,6 +45,8 @@ namespace CaseStudy.Screens
             if(isValid)
             {
                 newFlight.AirlineCode = userInput;
+                Console.WriteLine("Airline Code is now '" + newFlight.AirlineCode + "'\n");
+                ScreenManager.GetInstance().PushScreen(new AddFlightNumberScreen(newFlight));
             }
             else
             {
