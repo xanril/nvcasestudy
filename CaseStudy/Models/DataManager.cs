@@ -123,5 +123,15 @@ namespace CaseStudy.Models
         {
             return this._lastFlightID + 1;
         }
+
+        public bool HasDuplicateFlight(Flight flight)
+        {
+            Flight dupFlight = this._flights.Find(m => m.AirlineCode == flight.AirlineCode
+                                                    && m.FlightNumber == flight.FlightNumber);
+            if (dupFlight != null)
+                return true;
+
+            return false;
+        }
     }
 }
