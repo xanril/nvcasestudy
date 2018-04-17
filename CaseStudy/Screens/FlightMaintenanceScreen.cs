@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CaseStudy.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,7 +33,8 @@ namespace CaseStudy.Screens
             {
                 case MENU_ADD_FLIGHT:
                     Console.WriteLine("Add Flight selected.\n");
-                    ScreenManager.GetInstance().PushScreen(new AddFlightScreen());
+                    Flight newFlight = DataManager.GetInstance().CreateFlight();
+                    ScreenManager.GetInstance().PushScreen(new SetAirlineCodeScreen(newFlight));
                     break;
 
                 case MENU_SEARCH_FLIGHT:

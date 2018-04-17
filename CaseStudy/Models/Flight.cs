@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace CaseStudy.Models
 {
@@ -6,23 +7,17 @@ namespace CaseStudy.Models
     {
         private const int MAX_AIRLINE_CODE_LENGTH = 2;
 
-        public int ID
-        {
-            get; internal set;
-        }
+        public int ID { get; private set; }
 
-        // Required
-        // Alphanumeric 
-        // If first character is a digit, second character should be a letter 
-        // Cannot be both numbers 
-        // Exactly 2 characters
         // Possible to extend to 3 chars max
-        public string AirlineCode;
+        [Required(ErrorMessage = "Airline Code cannot be null.")]
+        [StringLength(2, MinimumLength = 2, ErrorMessage = "Airline Code should be exactly 2 alphanumeric characters.")]
+        [RegularExpression("[A-Z,a-z][0-9]|[0-9][A-Z,a-z]|[A-Z,a-z][A-Z,a-z]", ErrorMessage = "Airline Code cannot be both numbers.")]
+        public string AirlineCode { get; set; }
 
         // Required
-        // Numeric
-        // Min: 1, Max = 9999
-        public int FlightNumber;
+        [Range(minimum:1, maximum:9999, ErrorMessage = "Flight Number should be between the range of 1 to 9999")]
+        public int FlightNumber { get; set; }
 
         // Required
         public Station ArrivalStation;
@@ -61,17 +56,6 @@ namespace CaseStudy.Models
         public string GetSchedule()
         {
             return ScheduledTimeDeparture.ToShortTimeString() + " - " + ScheduledTimeArrival.ToShortTimeString();
-        }
-
-        public void SetAirlineCode(string airlineCode)
-        {
-            if (airlineCode.Length > MAX_AIRLINE_CODE_LENGTH)
-            {
-                throw new Exception("Airline Code should not exceed max length of " + MAX_AIRLINE_CODE_LENGTH);
-            }
-
-
-            //_airlineCode = airlineCode;
         }
 
         public void PrintInfo()
