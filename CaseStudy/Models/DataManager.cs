@@ -137,5 +137,12 @@ namespace CaseStudy.Models
             Reservation reservation = new Reservation();
             return reservation;
         }
+
+        public Reservation FindReservation(string pnr)
+        {
+            Reservation reservation = null;
+            reservation = reservations.Find(m => m.PNRNumber.Equals(pnr));
+            return reservation;
+        }
     }
 }
