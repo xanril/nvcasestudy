@@ -28,7 +28,6 @@ namespace CaseStudy.Models
             _flights = new List<Flight>();
             _reservations = new List<Reservation>();
             _stations = new List<Station>();
-            SetStationData();
         }
 
         public void LoadData()
@@ -37,44 +36,30 @@ namespace CaseStudy.Models
             CreateDummyReservations();
         }
 
-        private void SetStationData()
-        {
-            _stations.Add(new Station("MLL", "Marshall Airport"));                       // 0
-            _stations.Add(new Station("MLS", "Miles City Municipal Airport"));
-            _stations.Add(new Station("MLU", "Monroe Municipal Airport"));
-            _stations.Add(new Station("MLY", "Manley Hot Springs Airport"));
-            _stations.Add(new Station("MNL", "Ninoy Aquino International Airport"));
-            _stations.Add(new Station("MNT", "Minto Airport"));                          // 5
-            _stations.Add(new Station("MOB", "Mobile Municipal Airport"));
-            _stations.Add(new Station("MOD", "Modesto Municipal Airport"));
-            _stations.Add(new Station("MOT", "Minot International Airport"));
-            _stations.Add(new Station("MOU", "Mountain Village Airport"));
-        }
-
         private void CreateDummyFlights()
         {
             this._lastFlightID = 1;
             Flight flight = new Flight(this._lastFlightID);
             flight.AirlineCode = AIRLINE_CODE;
             flight.FlightNumber = 100;
-            flight.DepartureStation = _stations[4];
-            flight.ArrivalStation = _stations[0];
+            flight.DepartureStation = "MNL";
+            flight.ArrivalStation = "MLL";
             this._flights.Add(flight);
 
             this._lastFlightID = this._lastFlightID + 1;
             flight = new Flight(this._lastFlightID);
             flight.AirlineCode = AIRLINE_CODE;
             flight.FlightNumber = 101;
-            flight.DepartureStation = _stations[4];
-            flight.ArrivalStation = _stations[1];
+            flight.DepartureStation = "MNL";
+            flight.ArrivalStation = "MLS";
             this._flights.Add(flight);
 
             this._lastFlightID = this._lastFlightID + 1;
             flight = new Flight(this._lastFlightID);
             flight.AirlineCode = AIRLINE_CODE;
             flight.FlightNumber = 102;
-            flight.DepartureStation = _stations[4];
-            flight.ArrivalStation = _stations[2];
+            flight.DepartureStation = "MNL";
+            flight.ArrivalStation = "MLU";
             this._flights.Add(flight);
         }
 
@@ -119,7 +104,7 @@ namespace CaseStudy.Models
             return this._stations.ToArray();
         }
 
-        private int GetNextAvailableFlightID()
+        public int GetNextAvailableFlightID()
         {
             return this._lastFlightID + 1;
         }
