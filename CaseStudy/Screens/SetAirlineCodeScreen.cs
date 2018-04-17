@@ -7,11 +7,11 @@ namespace CaseStudy.Screens
 {
     class SetAirlineCodeScreen : IScreen
     {
-        private Flight newFlight;
+        private Flight flight;
 
         public SetAirlineCodeScreen(Flight flight)
         {
-            this.newFlight = flight;
+            this.flight = flight;
         }
 
         public void Display()
@@ -38,14 +38,14 @@ namespace CaseStudy.Screens
             }
 
             List<ValidationResult> validationResults = new List<ValidationResult>();
-            ValidationContext validationContext = new ValidationContext(newFlight, null, null) { MemberName = "AirlineCode" };
+            ValidationContext validationContext = new ValidationContext(flight, null, null) { MemberName = "AirlineCode" };
             bool isValid = Validator.TryValidateProperty(userInput, validationContext, validationResults);
 
             if(isValid)
             {
-                newFlight.AirlineCode = userInput;
-                Console.WriteLine("Airline Code is now '" + newFlight.AirlineCode + "'\n");
-                ScreenManager.GetInstance().PushScreen(new SetFlightNumberScreen(newFlight));
+                flight.AirlineCode = userInput;
+                Console.WriteLine("Airline Code is now '" + flight.AirlineCode + "'\n");
+                ScreenManager.GetInstance().PushScreen(new SetFlightNumberScreen(flight));
             }
             else
             {

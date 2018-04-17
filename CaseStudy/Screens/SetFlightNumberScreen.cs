@@ -8,11 +8,11 @@ namespace CaseStudy.Screens
     class SetFlightNumberScreen : IScreen
     {
         private static readonly string KEY_BACK_TO_MENU = "X";
-        private Flight newFlight;
+        private Flight flight;
 
         public SetFlightNumberScreen(Flight flight)
         {
-            this.newFlight = flight;
+            this.flight = flight;
         }
 
         public void Display()
@@ -44,22 +44,22 @@ namespace CaseStudy.Screens
             {
                 // validate input
                 List<ValidationResult> validationResults = new List<ValidationResult>();
-                ValidationContext validationContext = new ValidationContext(newFlight, null, null) { MemberName = "FlightNumber" };
+                ValidationContext validationContext = new ValidationContext(flight, null, null) { MemberName = "FlightNumber" };
                 bool isValid = Validator.TryValidateProperty(intUserInput, validationContext, validationResults);
 
                 if(isValid)
                 {
                     // check for duplicates
-                    newFlight.FlightNumber = intUserInput;
-                    bool hasDuplicateFlight = DataManager.GetInstance().HasDuplicateFlight(newFlight);
+                    flight.FlightNumber = intUserInput;
+                    bool hasDuplicateFlight = DataManager.GetInstance().HasDuplicateFlight(flight);
                     if(hasDuplicateFlight == false)
                     {
-                        Console.WriteLine("Flight Number is now '" + newFlight.FlightNumber + "'\n");
-                        ScreenManager.GetInstance().PushScreen(new SetDepartureStationScreen(newFlight));
+                        Console.WriteLine("Flight Number is now '" + flight.FlightNumber + "'\n");
+                        ScreenManager.GetInstance().PushScreen(new SetDepartureStationScreen(flight));
                     }
                     else
                     {
-                        Console.WriteLine("Flight " + newFlight.GetFlightDesignator() + "already exists.");
+                        Console.WriteLine("Flight " + flight.GetFlightDesignator() + "already exists.");
                     }
                 }
                 else
