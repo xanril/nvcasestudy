@@ -38,24 +38,21 @@ namespace CaseStudy.Models
 
         private void CreateDummyFlights()
         {
-            this._lastFlightID = 1;
-            Flight flight = new Flight(this._lastFlightID);
+            Flight flight = new Flight();
             flight.AirlineCode = AIRLINE_CODE;
             flight.FlightNumber = 100;
             flight.DepartureStation = "MNL";
             flight.ArrivalStation = "MLL";
             this._flights.Add(flight);
 
-            this._lastFlightID = this._lastFlightID + 1;
-            flight = new Flight(this._lastFlightID);
+            flight = new Flight();
             flight.AirlineCode = AIRLINE_CODE;
             flight.FlightNumber = 101;
             flight.DepartureStation = "MNL";
             flight.ArrivalStation = "MLS";
             this._flights.Add(flight);
 
-            this._lastFlightID = this._lastFlightID + 1;
-            flight = new Flight(this._lastFlightID);
+            flight = new Flight();
             flight.AirlineCode = AIRLINE_CODE;
             flight.FlightNumber = 102;
             flight.DepartureStation = "MNL";
@@ -67,7 +64,11 @@ namespace CaseStudy.Models
         {
             int currentID = 1;
             Reservation reservation = new Reservation(currentID);
-            reservation.FlightID = _flights[0].ID;
+            reservation.flight = new Flight();
+            reservation.flight.AirlineCode = _flights[0].AirlineCode;
+            reservation.flight.FlightNumber = _flights[0].FlightNumber;
+            reservation.flight.ArrivalStation = _flights[0].ArrivalStation;
+            reservation.flight.DepartureStation = _flights[0].DepartureStation;
             Passenger passenger = new Passenger(0);
             passenger.FirstName = "Tony";
             passenger.LastName = "Stark";
@@ -78,7 +79,11 @@ namespace CaseStudy.Models
 
             currentID = this._reservations.Count + 1;
             reservation = new Reservation(currentID);
-            reservation.FlightID = _flights[1].ID;
+            reservation.flight = new Flight();
+            reservation.flight.AirlineCode = _flights[1].AirlineCode;
+            reservation.flight.FlightNumber = _flights[1].FlightNumber;
+            reservation.flight.ArrivalStation = _flights[1].ArrivalStation;
+            reservation.flight.DepartureStation = _flights[1].DepartureStation;
             passenger = new Passenger(0);
             passenger.FirstName = "Steve";
             passenger.LastName = "Rogers";
@@ -86,12 +91,6 @@ namespace CaseStudy.Models
             DateTime.TryParse(birthdateString, out passenger.Birthday);
             reservation.Passengers.Add(passenger);
             _reservations.Add(reservation);
-        }
-
-        public Flight GetFlight(int flightID)
-        {
-            Flight flight = _flights.Find(m => m.ID == flightID);
-            return flight;
         }
 
         public Flight[] GetFlights()
@@ -121,9 +120,7 @@ namespace CaseStudy.Models
 
         public Flight CreateFlight()
         {
-            int nextFlightID = GetNextAvailableFlightID();
-            Flight newFlight = new Flight(nextFlightID);
-
+            Flight newFlight = new Flight();
             return newFlight;
         }
 

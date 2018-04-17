@@ -7,8 +7,6 @@ namespace CaseStudy.Models
     {
         private const int MAX_AIRLINE_CODE_LENGTH = 2;
 
-        public int ID { get; private set; }
-
         // Possible to extend to 3 chars max
         [Required(ErrorMessage = "Airline Code cannot be null.")]
         [StringLength(2, MinimumLength = 2, ErrorMessage = "Airline Code should be exactly 2 alphanumeric characters.")]
@@ -37,10 +35,8 @@ namespace CaseStudy.Models
         // Valid Time, 24-Hour format
         public DateTime ScheduledTimeDeparture;
 
-        public Flight(int id)
+        public Flight()
         {
-            this.ID = id;
-
             // initial values
             this.AirlineCode = "A1";
             this.FlightNumber = 1;

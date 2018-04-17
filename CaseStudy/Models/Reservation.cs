@@ -10,7 +10,7 @@ namespace CaseStudy.Models
             get; internal set;
         }
 
-        public int FlightID;
+        public Flight flight;
 
         // Max 5 per booking
         public List<Passenger> Passengers;
@@ -29,8 +29,6 @@ namespace CaseStudy.Models
 
         public void PrintInfo()
         {
-            Flight flight = DataManager.GetInstance().GetFlight(this.FlightID);
-
             Console.WriteLine("PNR: " + this.PNRNumber);
             Console.WriteLine("Flight: " + flight.GetFlightDesignator());
             Console.WriteLine("Passengers:");
