@@ -14,7 +14,7 @@ namespace CaseStudy.Models
             get; internal set;
         }
 
-        public Reservation(int id)
+        public Reservation()
         {
             this.Passengers = new List<Passenger>();
 

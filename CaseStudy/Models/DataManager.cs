@@ -134,7 +134,7 @@ namespace CaseStudy.Models
 
         public Reservation CreateReservation()
         {
-            Reservation reservation = new Reservation(0);
+            Reservation reservation = new Reservation();
             return reservation;
         }
     }
