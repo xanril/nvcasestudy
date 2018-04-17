@@ -16,13 +16,15 @@ namespace CaseStudy.Models
         public string AirlineCode { get; set; }
 
         // Required
-        [Range(minimum:1, maximum:9999, ErrorMessage = "Flight Number should be between the range of 1 to 9999")]
+        [Range(minimum:1, maximum:9999, ErrorMessage = "Flight Number should be between the range of 1 to 9999.")]
         public int FlightNumber { get; set; }
 
-        // Required
+        [Required(ErrorMessage = "Arrival Station should have a value.")]
+        // 3 chars, fixed
         public string ArrivalStation { get; set; }
 
-        // Required
+        [Required(ErrorMessage = "Departure Station should have a value.")]
+        // 3 chars fixed
         public string  DepartureStation { get; set; }
 
         // Required
