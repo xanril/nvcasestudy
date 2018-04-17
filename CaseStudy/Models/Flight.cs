@@ -53,6 +53,7 @@ namespace CaseStudy.Models
 
         public string GetFlightDesignator()
         {
+            //TODO: Add flight number padding
             return AirlineCode + FlightNumber;
         }
 
@@ -68,6 +69,7 @@ namespace CaseStudy.Models
 
         public void PrintInfo()
         {
+            // TODO: should not do console out. refactor to return string instead
             string infoString = GetFlightDesignator() + "\t" + GetMarket() + "   " + GetSchedule();
             Console.WriteLine(infoString);
         }
