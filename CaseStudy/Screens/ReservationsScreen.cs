@@ -35,8 +35,8 @@ namespace CaseStudy.Screens
             {
                 case MENU_BOOK_FLIGHT:
                     Console.WriteLine("Book a Flight selected.\n");
-                    //Flight newFlight = DataManager.GetInstance().CreateFlight();
-                    //ScreenManager.GetInstance().PushScreen(new SetAirlineCodeScreen(newFlight));
+                    Reservation reservation = DataManager.GetInstance().CreateReservation();
+                    ScreenManager.GetInstance().PushScreen(new SelectFlightScreen(reservation));
                     break;
 
                 case MENU_LIST_RESERVATIONS:
