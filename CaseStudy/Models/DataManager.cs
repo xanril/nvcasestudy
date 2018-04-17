@@ -126,5 +126,16 @@ namespace CaseStudy.Models
 
             return newFlight;
         }
+
+        public bool AddFlight(Flight flight)
+        {
+            if(flight == null)
+            {
+                throw new ArgumentNullException(nameof(flight));
+            }
+
+            this._flights.Add(flight);
+            return true;
+        }
     }
 }
