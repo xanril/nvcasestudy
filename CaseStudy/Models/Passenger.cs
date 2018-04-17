@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace CaseStudy.Models
 {
@@ -29,9 +30,9 @@ namespace CaseStudy.Models
             this.ID = id;
         }
 
-        public void PrintInfo()
+        public string GetInfo()
         {
-            Console.WriteLine(this.LastName + ", " + this.FirstName + "\t" + Birthday.ToShortDateString());
+            return this.LastName + ", " + this.FirstName + "\t" + Birthday.ToShortDateString();
         }
     }
 }

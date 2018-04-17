@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace CaseStudy.Models
 {
@@ -21,16 +22,21 @@ namespace CaseStudy.Models
             this.PNRNumber = "generate pls";
         }
 
-        public void PrintInfo()
+        public string GetInfo()
         {
-            Console.WriteLine("PNR: " + this.PNRNumber);
-            Console.WriteLine("Flight: " + flight.GetFlightDesignator());
-            Console.WriteLine("Passengers:");
+            StringBuilder strBuilder = new StringBuilder();
+
+            strBuilder.AppendLine("PNR: " + this.PNRNumber);
+            strBuilder.AppendLine("Flight: " + flight.GetFlightDesignator());
+            int counter = 1;
             foreach (Passenger passenger in this.Passengers)
             {
-                Console.Write("\t");
-                passenger.PrintInfo();
+                strBuilder.Append("Passenger " + counter + ": ");
+                strBuilder.AppendLine(passenger.GetInfo());
+                counter++;
             }
+            
+            return strBuilder.ToString();
         }
     }
 }
