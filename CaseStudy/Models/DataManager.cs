@@ -132,6 +132,14 @@ namespace CaseStudy.Models
             return true;
         }
 
+        public Flight FindFlight(string airlinecode, int flightNumber)
+        {
+            Flight flight = null;
+            flight = flights.Find(m => m.AirlineCode.Equals(airlinecode) && m.FlightNumber == flightNumber);
+
+            return flight;
+        }
+
         public Reservation CreateReservation()
         {
             Reservation reservation = new Reservation();
