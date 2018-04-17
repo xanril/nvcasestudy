@@ -51,6 +51,33 @@ namespace CaseStudy.Screens
             }
         }
 
+        public void PopScreenUntilTargetType(Type ofType)
+        {
+            bool willStop = false;
+
+            // only process types that is derived from IScreen
+            if (typeof(IScreen).IsAssignableFrom(ofType) == false)
+                return;
+
+            do
+            {
+                if (screenStack.Count == 0)
+                    willStop = true;
+                else
+                {
+                    if (this.screenStack.Peek().GetType().Equals(ofType) == false)
+                        this.screenStack.Pop();
+                    else
+                    {
+                        willStop = true;
+                        this.activeScreen = this.screenStack.Peek();
+                        this.activeScreen.Display();
+                    }
+                }
+            }
+            while (willStop == false);
+        }
+
         public void PushScreen(IScreen screen)
         {
             if (screen != null)
