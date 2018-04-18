@@ -1,4 +1,5 @@
-﻿using CaseStudy.Models;
+﻿using CaseStudy.DataManagers;
+using CaseStudy.Models;
 using CaseStudy.Screens;
 using System;
 
@@ -44,7 +45,7 @@ namespace CaseStudy.Booking.Screens
 
             if(int.TryParse(arrInputs[1], out flightNumber))
             {
-                Flight flight = DataManager.GetInstance().FindFlight(airlineCode, flightNumber);
+                Flight flight = FlightDataManager.Instance.FindFlight(airlineCode, flightNumber);
                 if(flight != null)
                 {
                     Console.WriteLine("Flight record found.");

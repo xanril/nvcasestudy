@@ -1,4 +1,5 @@
-﻿using CaseStudy.Models;
+﻿using CaseStudy.DataManagers;
+using CaseStudy.Models;
 using CaseStudy.Screens;
 using System;
 using System.Collections.Generic;
@@ -7,13 +8,6 @@ namespace CaseStudy.Maintenance.Screens
 {
     class SearchAirlineCodeScreen : IScreen
     {
-        private List<Flight> flights;
-
-        public SearchAirlineCodeScreen()
-        {
-            flights = new List<Flight>(DataManager.GetInstance().GetFlights());
-        }
-
         public void Display()
         {
             Console.WriteLine("\nFLIGHT MAINTENANCE > SEARCH FLIGHT > BY AIRLINE CODE");
@@ -29,9 +23,8 @@ namespace CaseStudy.Maintenance.Screens
             userInput = userInput.ToUpper();
             // TODO: Add validation for airline code?
 
-            // TODO: Move search function to manager
-            List<Flight> resultFlights = flights.FindAll(m => m.AirlineCode == userInput);
-            if(resultFlights == null || resultFlights.Count == 0)
+            Flight[] resultFlights = FlightDataManager.Instance.FindFlightsByAirlineCode(userInput);
+            if (resultFlights == null || resultFlights.Length == 0)
             {
                 Console.WriteLine("No flight record found.");
                 ScreenManager.GetInstance().PopScreen();

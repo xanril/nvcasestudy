@@ -1,4 +1,5 @@
-﻿using CaseStudy.Models;
+﻿using CaseStudy.DataManagers;
+using CaseStudy.Models;
 using CaseStudy.Screens;
 using System;
 
@@ -104,7 +105,7 @@ namespace CaseStudy.Maintenance.Screens
                 case CreateFlightStates.StateGetDepartureStation:
 
                     // check for same flight with same departure station
-                    Flight sameFlight = DataManager.GetInstance().FindFlight(flight.AirlineCode, flight.FlightNumber);
+                    Flight sameFlight = FlightDataManager.Instance.FindFlight(flight.AirlineCode, flight.FlightNumber);
                     if(sameFlight != null && sameFlight.DepartureStation.Equals(userInput))
                     {
                         Console.WriteLine("Flight with same departure station already exists.");
@@ -139,7 +140,7 @@ namespace CaseStudy.Maintenance.Screens
                     {
                         try
                         {
-                            DataManager.GetInstance().AddFlight(flight);
+                            FlightDataManager.Instance.AddFlight(flight);
                             Console.WriteLine("New Flight added.");
                             Console.WriteLine("---------------------------------------------------");
                             Console.WriteLine(flight.GetInfo());
