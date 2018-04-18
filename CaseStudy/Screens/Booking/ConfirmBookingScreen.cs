@@ -1,4 +1,5 @@
-﻿using CaseStudy.Models;
+﻿using CaseStudy.DataManagers;
+using CaseStudy.Models;
 using CaseStudy.Screens;
 using System;
 
@@ -40,7 +41,7 @@ namespace CaseStudy.Booking.Screens
 
                     try
                     {
-                        DataManager.GetInstance().AddReservation(reservation);
+                        ReservationDataManager.Instance.AddReservation(reservation);
                         Console.WriteLine("Booking saved.");
                         ScreenManager.GetInstance().PopScreenUntilTargetType(typeof(ReservationsScreen));
                     }

@@ -1,4 +1,5 @@
-﻿using CaseStudy.Models;
+﻿using CaseStudy.DataManagers;
+using CaseStudy.Models;
 using CaseStudy.Screens;
 using System;
 
@@ -23,7 +24,7 @@ namespace CaseStudy.Booking.Screens
             userInput = userInput.Trim();
             userInput = userInput.ToUpper();
 
-            Reservation reservation = DataManager.GetInstance().FindReservation(userInput);
+            Reservation reservation = ReservationDataManager.Instance.FindReservation(userInput);
             
             if(reservation == null)
             {
