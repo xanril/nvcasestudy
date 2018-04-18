@@ -17,13 +17,12 @@ namespace CaseStudy.Maintenance.Screens
 
         public void Display()
         {
-            Console.WriteLine("FLIGHT MAINTENANCE > ADD FLIGHT > SET AIRLINE CODE");
+            Console.WriteLine("\nFLIGHT MAINTENANCE > ADD FLIGHT");
         }
 
         public void ShowInputPrompt()
         {
-            Console.WriteLine("");
-            Console.Write("Enter Airline Code or 'X' to go back: ");
+            Console.Write("Airline Code: ");
         }
 
         public void ProcessInput(string userInput)
@@ -31,29 +30,15 @@ namespace CaseStudy.Maintenance.Screens
             userInput = userInput.ToUpper();
             userInput = userInput.Trim();
 
-            if (userInput == "X")
-            {
-                Console.WriteLine("Back To Menu selected.\n");
-                ScreenManager.GetInstance().PopScreen();
-                return;
-            }
-
-            List<ValidationResult> validationResults = new List<ValidationResult>();
-            ValidationContext validationContext = new ValidationContext(flight, null, null) { MemberName = "AirlineCode" };
-            bool isValid = Validator.TryValidateProperty(userInput, validationContext, validationResults);
-
-            if(isValid)
+            try
             {
                 flight.AirlineCode = userInput;
                 Console.WriteLine("Airline Code is now '" + flight.AirlineCode + "'\n");
                 ScreenManager.GetInstance().PushScreen(new SetFlightNumberScreen(flight));
             }
-            else
+            catch(Exception ex)
             {
-                foreach(ValidationResult result in validationResults)
-                {
-                    Console.WriteLine(result.ErrorMessage);
-                }
+                Console.Write(ex.Message);
             }
         }
     }
