@@ -67,12 +67,18 @@ namespace CaseStudy.Models
         {
             firstName = "A";
             LastName = "B";
+
+            // makes sure that initial value of birthdate is always in the past.
+            birthdate = DateTime.Now.AddYears(-1).AddDays(-1);
+
+            // and age initial value is 1.
             age = 1;
         }
 
         public string GetInfo()
         {
-            return this.LastName + ", " + this.FirstName + "\t" + Birthday.ToShortDateString();
+            return this.LastName + ", " + this.FirstName + "\t" + Birthdate.ToShortDateString();
+        }
 
         private void CalculateAge()
         {
