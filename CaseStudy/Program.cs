@@ -16,10 +16,10 @@ namespace CaseStudy
             ScreenManager.GetInstance().Initialize();
             ScreenManager.GetInstance().ShowScreen();
 
-            Console.WriteLine("");
-            Console.WriteLine("- - - - - -");
-            Console.WriteLine("Program Exited.");
-            Console.ReadKey();
+            //Console.WriteLine("");
+            //Console.WriteLine("---------------------------------------------------");
+            //Console.WriteLine("Program Exited.");
+            //Console.ReadKey();
         }
     }
 }
