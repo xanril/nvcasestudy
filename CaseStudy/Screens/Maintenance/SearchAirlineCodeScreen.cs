@@ -34,6 +34,7 @@ namespace CaseStudy.Maintenance.Screens
             if(resultFlights == null || resultFlights.Count == 0)
             {
                 Console.WriteLine("No flight record found.");
+                ScreenManager.GetInstance().PopScreen();
             }
             else
             {
