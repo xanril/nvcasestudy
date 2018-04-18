@@ -58,10 +58,7 @@
     <Compile Include="Screens\Booking\ReservationsScreen.cs" />
     <Compile Include="Screens\Booking\SearchPNRScreen.cs" />
     <Compile Include="Screens\Booking\SelectFlightScreen.cs" />
-    <Compile Include="Screens\Maintenance\SetArrivalStationScreen.cs" />
-    <Compile Include="Screens\Maintenance\SetDepartureStationScreen.cs" />
-    <Compile Include="Screens\Maintenance\SetFlightNumberScreen.cs" />
-    <Compile Include="Screens\Maintenance\SetAirlineCodeScreen.cs" />
+    <Compile Include="Screens\Maintenance\SetNewFlightScreen.cs" />
     <Compile Include="Screens\Maintenance\FlightMaintenanceScreen.cs" />
     <Compile Include="Screens\IScreen.cs" />
     <Compile Include="Screens\MenuScreen.cs" />
