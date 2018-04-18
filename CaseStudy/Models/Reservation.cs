@@ -1,42 +1,76 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Text;
+using System.ComponentModel.DataAnnotations;
+using CaseStudy.Helpers;
+using System;
 
 namespace CaseStudy.Models
 {
     class Reservation
     {
-        public int ID
-        {
-            get; internal set;
-        }
-
         public Flight flight;
 
         // Max 5 per booking
-        public List<Passenger> Passengers;
-        public string PNRNumber
+        private List<Passenger> passengers;
+        public IEnumerable<Passenger> Passengers
         {
-            get; internal set;
+            get { return passengers; }
         }
 
-        public Reservation(int id)
+        public string PNR
         {
-            this.ID = id;
-            this.Passengers = new List<Passenger>();
-
-            this.PNRNumber = "generate pls";
+            get; private set;
         }
 
-        public void PrintInfo()
+        private int passengerCount;
+
+        [Range(1, 5, ErrorMessage = "Passenger count should be at least 1 to maximum of 5")]
+        public int PassengerCount
         {
-            Console.WriteLine("PNR: " + this.PNRNumber);
-            Console.WriteLine("Flight: " + flight.GetFlightDesignator());
-            Console.WriteLine("Passengers:");
+            get { return passengerCount; }
+            set
+            {
+                ValidationHelperResult validationResult = ValidationHelper.ValidateProperty<Reservation>(this, nameof(PassengerCount), value);
+                if(validationResult.IsValid)
+                {
+                    throw new Exception(validationResult.GetErrorMessages());
+                }
+
+                passengerCount = value;
+            }
+        }
+
+        public Reservation()
+        {
+            this.passengers = new List<Passenger>();
+            this.PNR = "generate pls";
+        }
+
+        public void AddPassenger(Passenger passenger)
+        {
+            passengers.Add(passenger);
+        }
+
+        public void SetPNR(string generatedPNR)
+        {
+            this.PNR = generatedPNR;
+        }
+
+        public string GetInfo()
+        {
+            StringBuilder strBuilder = new StringBuilder();
+
+            strBuilder.AppendLine("PNR: " + this.PNR);
+            strBuilder.AppendLine("Flight: " + flight.GetFlightDesignator());
+            int counter = 1;
             foreach (Passenger passenger in this.Passengers)
             {
-                Console.Write("\t");
-                passenger.PrintInfo();
+                strBuilder.Append("Passenger " + counter + ": ");
+                strBuilder.AppendLine(passenger.GetInfo());
+                counter++;
             }
+            
+            return strBuilder.ToString();
         }
     }
 }

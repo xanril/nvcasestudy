@@ -33,7 +33,7 @@ namespace CaseStudy.Screens
 
                 case MENU_RESERVATION:
                     Console.WriteLine("Reservations Selected.\n");
-                    //TODO: Push Reservation Screen
+                    ScreenManager.GetInstance().PushScreen(new ReservationsScreen());
                     break;
 
                 case MENU_EXIT:

@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="Models\DataManager.cs" />
     <Compile Include="Models\Flight.cs" />
     <Compile Include="Models\Passenger.cs" />
@@ -52,6 +53,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screens\AbstractScreen.cs" />
     <Compile Include="Screens\AddNewFlightScreen.cs" />
+    <Compile Include="Screens\ConfirmBookingScreen.cs" />
+    <Compile Include="Screens\ListReservationsScreen.cs" />
+    <Compile Include="Screens\ReservationsScreen.cs" />
+    <Compile Include="Screens\SearchPNRScreen.cs" />
+    <Compile Include="Screens\SelectFlightScreen.cs" />
     <Compile Include="Screens\SetArrivalStationScreen.cs" />
     <Compile Include="Screens\SetDepartureStationScreen.cs" />
     <Compile Include="Screens\SetFlightNumberScreen.cs" />
@@ -64,6 +70,7 @@
     <Compile Include="Screens\SearchFlightNumberScreen.cs" />
     <Compile Include="Screens\SearchFlightScreen.cs" />
     <Compile Include="Screens\SearchMarketScreen.cs" />
+    <Compile Include="Screens\SetFlightPassengersScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -21,7 +21,11 @@ namespace CaseStudy.Models
         private List<Flight> flights;
         private List<Reservation> reservations;
         private List<Station> stations;
-        private int _lastFlightID = -1;
+
+        public IEnumerable<Reservation> Reservations
+        {
+            get { return reservations; }
+        }
 
         private DataManager()
         {
@@ -62,34 +66,35 @@ namespace CaseStudy.Models
 
         private void CreateDummyReservations()
         {
-            int currentID = 1;
-            Reservation reservation = new Reservation(currentID);
+            Reservation reservation = new Reservation();
             reservation.flight = new Flight();
             reservation.flight.AirlineCode = flights[0].AirlineCode;
             reservation.flight.FlightNumber = flights[0].FlightNumber;
             reservation.flight.ArrivalStation = flights[0].ArrivalStation;
             reservation.flight.DepartureStation = flights[0].DepartureStation;
-            Passenger passenger = new Passenger(0);
+            Passenger passenger = new Passenger();
             passenger.FirstName = "Tony";
             passenger.LastName = "Stark";
             string birthdateString = "5/29/1970 0:00:00 AM";
-            DateTime.TryParse(birthdateString, out passenger.Birthday);
-            reservation.Passengers.Add(passenger);
+            DateTime parsedBirthdate;
+            DateTime.TryParse(birthdateString, out parsedBirthdate);
+            passenger.Birthdate = parsedBirthdate;
+            reservation.AddPassenger(passenger);
             reservations.Add(reservation);
 
-            currentID = this.reservations.Count + 1;
-            reservation = new Reservation(currentID);
+            reservation = new Reservation();
             reservation.flight = new Flight();
             reservation.flight.AirlineCode = flights[1].AirlineCode;
             reservation.flight.FlightNumber = flights[1].FlightNumber;
             reservation.flight.ArrivalStation = flights[1].ArrivalStation;
             reservation.flight.DepartureStation = flights[1].DepartureStation;
-            passenger = new Passenger(0);
+            passenger = new Passenger();
             passenger.FirstName = "Steve";
             passenger.LastName = "Rogers";
             birthdateString = "7/4/1970 0:00:00 AM";
-            DateTime.TryParse(birthdateString, out passenger.Birthday);
-            reservation.Passengers.Add(passenger);
+            DateTime.TryParse(birthdateString, out parsedBirthdate);
+            passenger.Birthdate = parsedBirthdate;
+            reservation.AddPassenger(passenger);
             reservations.Add(reservation);
         }
 
@@ -101,11 +106,6 @@ namespace CaseStudy.Models
         public Station[] GetStations()
         {
             return this.stations.ToArray();
-        }
-
-        public int GetNextAvailableFlightID()
-        {
-            return this._lastFlightID + 1;
         }
 
         public bool HasDuplicateFlight(Flight flight)
@@ -124,7 +124,7 @@ namespace CaseStudy.Models
             return newFlight;
         }
 
-        public bool AddFlight(Flight flight)
+        public void AddFlight(Flight flight)
         {
             if(flight == null)
             {
@@ -132,7 +132,42 @@ namespace CaseStudy.Models
             }
 
             this.flights.Add(flight);
-            return true;
+        }
+
+        public Flight FindFlight(string airlinecode, int flightNumber)
+        {
+            Flight flight = null;
+            flight = flights.Find(m => m.AirlineCode.Equals(airlinecode) && m.FlightNumber == flightNumber);
+
+            return flight;
+        }
+
+        public Reservation CreateReservation()
+        {
+            Reservation reservation = new Reservation();
+            reservation.SetPNR(GeneratePNR());
+            return reservation;
+        }
+
+        public Reservation FindReservation(string pnr)
+        {
+            Reservation reservation = null;
+            reservation = reservations.Find(m => m.PNR.Equals(pnr));
+            return reservation;
+        }
+
+        public void AddReservation(Reservation reservation)
+        {
+            if (reservation == null)
+                throw new ArgumentException(nameof(reservation));
+
+            this.reservations.Add(reservation);
+            //TODO: Save Reservations to text file.
+        }
+
+        private string GeneratePNR()
+        {
+            return "GeneratedPNR";
         }
     }
 }
