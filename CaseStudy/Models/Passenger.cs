@@ -47,8 +47,12 @@ namespace CaseStudy.Models
             get { return birthdate; }
             set
             {
-                birthday = value;
-                //TODO: calculate age here
+                // check if birthdate is a future date
+                if(value >= DateTime.Today)
+                    throw new Exception("Birthdate should be a past date.");
+
+                birthdate = value;
+                CalculateAge();
             }
         }
 
@@ -69,6 +73,16 @@ namespace CaseStudy.Models
         public string GetInfo()
         {
             return this.LastName + ", " + this.FirstName + "\t" + Birthday.ToShortDateString();
+
+        private void CalculateAge()
+        {
+            DateTime today = DateTime.Today;
+            age = today.Year - birthdate.Year;
+            if (birthdate > today.AddYears(-age))
+                age = age - 1;
+
+            if (age < 0)
+                age = 0;
         }
     }
 }
