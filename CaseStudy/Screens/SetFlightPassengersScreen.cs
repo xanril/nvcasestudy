@@ -113,7 +113,7 @@ namespace CaseStudy.Screens
 
                             if(reservation.Passengers.Count<Passenger>() == reservation.PassengerCount)
                             {
-                                ChangeToSummaryScreen();
+                                ScreenManager.GetInstance().PushScreen(new ConfirmBookingScreen(reservation));
                             }
                             else
                             {
@@ -132,11 +132,6 @@ namespace CaseStudy.Screens
                     }
                     break;
             }
-        }
-
-        private void ChangeToConfirmBookingScreen()
-        {
-            //TODO: Implement change to confirm booking screen
         }
     }
 }
