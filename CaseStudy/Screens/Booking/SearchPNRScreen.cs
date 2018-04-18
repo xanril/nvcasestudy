@@ -10,13 +10,12 @@ namespace CaseStudy.Booking.Screens
 
         public void Display()
         {
-            Console.WriteLine("RESERVATIONS > SEARCH BY PNR");
+            Console.WriteLine("\nRESERVATIONS > SEARCH BY PNR");
         }
 
         public void ShowInputPrompt()
         {
-            Console.WriteLine("");
-            Console.Write("Enter PNR or press 'X' to go back to menu: ");
+            Console.Write("PNR: ");
         }
 
         public void ProcessInput(string userInput)
@@ -24,23 +23,20 @@ namespace CaseStudy.Booking.Screens
             userInput = userInput.Trim();
             userInput = userInput.ToUpper();
 
-            if(userInput == KEY_BACK_TO_MENU)
-            {
-                Console.WriteLine("Back To Menu selected.\n");
-                ScreenManager.GetInstance().PopScreenUntilTargetType(typeof(ReservationsScreen));
-                return;
-            }
-
             Reservation reservation = DataManager.GetInstance().FindReservation(userInput);
             
             if(reservation == null)
             {
-                Console.WriteLine("No Reservation record exists for PNR " + userInput);
+                Console.WriteLine("No Reservation record exists for PNR {0}.", userInput);
             }
             else
             {
                 Console.WriteLine("Reservation record found.");
-                Console.WriteLine(reservation.GetInfo());
+                Console.WriteLine("---------------------------------------------------");
+                Console.Write(reservation.GetInfo());
+                Console.WriteLine("---------------------------------------------------");
+
+                ScreenManager.GetInstance().PopScreen();
             }
         }
     }

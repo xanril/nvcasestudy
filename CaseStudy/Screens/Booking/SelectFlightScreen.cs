@@ -6,7 +6,6 @@ namespace CaseStudy.Booking.Screens
 {
     class SelectFlightScreen : IScreen
     {
-        private const string KEY_BACK_TO_MENU = "X";
         private Reservation reservation;
 
         public SelectFlightScreen(Reservation reservation)
@@ -16,13 +15,12 @@ namespace CaseStudy.Booking.Screens
 
         public void Display()
         {
-            Console.WriteLine("RESERVATIONS > SELECT FLIGHT");
+            Console.WriteLine("\nRESERVATIONS > SELECT FLIGHT");
         }
 
         public void ShowInputPrompt()
         {
-            Console.WriteLine("");
-            Console.Write("Enter Airline Code and Flight Number (XX YYYY): ");
+            Console.Write("Airline Code and Flight Number (XX0000): ");
         }
 
         public void ProcessInput(string userInput)
@@ -30,19 +28,16 @@ namespace CaseStudy.Booking.Screens
             userInput = userInput.Trim();
             userInput = userInput.ToUpper();
 
-            if (userInput == KEY_BACK_TO_MENU)
-            {
-                Console.WriteLine("Back To Menu selected.\n");
-                ScreenManager.GetInstance().PopScreenUntilTargetType(typeof(ReservationsScreen));
-                return;
-            }
-
-            string[] arrInputs = userInput.Split(' ');
-            if(arrInputs.Length < 2)
+            if(userInput.Length < 3)
             {
                 Console.WriteLine("Invalid Flight Designator format. Please try again.");
                 return;
             }
+
+            string[] arrInputs = {
+                                    userInput.Substring(0, 2),
+                                    userInput.Substring(2)
+                                 };
 
             string airlineCode = arrInputs[0];
             int flightNumber = 0;
@@ -53,7 +48,9 @@ namespace CaseStudy.Booking.Screens
                 if(flight != null)
                 {
                     Console.WriteLine("Flight record found.");
+                    Console.WriteLine("---------------------------------------------------");
                     flight.PrintInfo();
+                    Console.WriteLine("---------------------------------------------------");
                     Console.WriteLine("");
 
                     reservation.flight = flight;
@@ -61,8 +58,8 @@ namespace CaseStudy.Booking.Screens
                 }
                 else
                 {
-                    Console.WriteLine("Flight record does not exist.\n");
-                    ScreenManager.GetInstance().PopScreenUntilTargetType(typeof(ReservationsScreen));
+                    Console.WriteLine("Flight record does not exist.");
+                    ScreenManager.GetInstance().PopScreen();
                 }
             }
             else
