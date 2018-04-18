@@ -46,11 +46,9 @@
     <Compile Include="DataManagers\FlightDataManager.cs" />
     <Compile Include="DataManagers\ReservationDataManager.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />
-    <Compile Include="Models\DataManager.cs" />
     <Compile Include="Models\Flight.cs" />
     <Compile Include="Models\Passenger.cs" />
     <Compile Include="Models\Reservation.cs" />
-    <Compile Include="Models\Station.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screens\AbstractScreen.cs" />
