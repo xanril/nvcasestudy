@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataManagers\FlightDataManager.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="Models\DataManager.cs" />
     <Compile Include="Models\Flight.cs" />
