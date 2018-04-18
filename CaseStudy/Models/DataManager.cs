@@ -124,7 +124,7 @@ namespace CaseStudy.Models
             return newFlight;
         }
 
-        public bool AddFlight(Flight flight)
+        public void AddFlight(Flight flight)
         {
             if(flight == null)
             {
@@ -132,7 +132,6 @@ namespace CaseStudy.Models
             }
 
             this.flights.Add(flight);
-            return true;
         }
 
         public Flight FindFlight(string airlinecode, int flightNumber)
@@ -146,14 +145,29 @@ namespace CaseStudy.Models
         public Reservation CreateReservation()
         {
             Reservation reservation = new Reservation();
+            reservation.SetPNR(GeneratePNR());
             return reservation;
         }
 
         public Reservation FindReservation(string pnr)
         {
             Reservation reservation = null;
-            reservation = reservations.Find(m => m.PNRNumber.Equals(pnr));
+            reservation = reservations.Find(m => m.PNR.Equals(pnr));
             return reservation;
+        }
+
+        public void AddReservation(Reservation reservation)
+        {
+            if (reservation == null)
+                throw new ArgumentException(nameof(reservation));
+
+            this.reservations.Add(reservation);
+            //TODO: Save Reservations to text file.
+        }
+
+        private string GeneratePNR()
+        {
+            return "GeneratedPNR";
         }
     }
 }

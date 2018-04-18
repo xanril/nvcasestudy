@@ -17,7 +17,7 @@ namespace CaseStudy.Models
             get { return passengers; }
         }
 
-        public string PNRNumber
+        public string PNR
         {
             get; private set;
         }
@@ -43,8 +43,7 @@ namespace CaseStudy.Models
         public Reservation()
         {
             this.passengers = new List<Passenger>();
-
-            this.PNRNumber = "generate pls";
+            this.PNR = "generate pls";
         }
 
         public void AddPassenger(Passenger passenger)
@@ -52,11 +51,16 @@ namespace CaseStudy.Models
             passengers.Add(passenger);
         }
 
+        public void SetPNR(string generatedPNR)
+        {
+            this.PNR = generatedPNR;
+        }
+
         public string GetInfo()
         {
             StringBuilder strBuilder = new StringBuilder();
 
-            strBuilder.AppendLine("PNR: " + this.PNRNumber);
+            strBuilder.AppendLine("PNR: " + this.PNR);
             strBuilder.AppendLine("Flight: " + flight.GetFlightDesignator());
             int counter = 1;
             foreach (Passenger passenger in this.Passengers)
