@@ -22,7 +22,7 @@ namespace CaseStudy.Maintenance.Screens
                 DataManager.GetInstance().AddFlight(flight);
 
                 Console.WriteLine("New Flight added.");
-                flight.PrintInfo();
+                Console.WriteLine(flight.GetInfo());
             }
             catch (Exception ex)
             {

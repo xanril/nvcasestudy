@@ -128,7 +128,7 @@ namespace CaseStudy.Models
         {
             if(flight == null)
             {
-                throw new ArgumentNullException(nameof(flight));
+                throw new ArgumentNullException("Flight to be added cannot be null.");
             }
 
             this.flights.Add(flight);

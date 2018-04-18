@@ -49,7 +49,7 @@ namespace CaseStudy.Booking.Screens
                 {
                     Console.WriteLine("Flight record found.");
                     Console.WriteLine("---------------------------------------------------");
-                    flight.PrintInfo();
+                    Console.WriteLine(flight.GetInfo());
                     Console.WriteLine("---------------------------------------------------");
                     Console.WriteLine("");
 

@@ -42,7 +42,7 @@ namespace CaseStudy.Maintenance.Screens
                 Console.WriteLine("---------------------------------------------------");
                 foreach (Flight flight in resultFlights)
                 {
-                    flight.PrintInfo();
+                    Console.WriteLine(flight.GetInfo());
                 }
                 Console.WriteLine("---------------------------------------------------");
 

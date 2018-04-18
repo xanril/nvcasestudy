@@ -31,7 +31,7 @@ namespace CaseStudy.Maintenance.Screens
                 case MENU_ADD_FLIGHT:
                     Console.WriteLine("Add Flight selected.");
                     Flight newFlight = DataManager.GetInstance().CreateFlight();
-                    ScreenManager.GetInstance().PushScreen(new SetAirlineCodeScreen(newFlight));
+                    ScreenManager.GetInstance().PushScreen(new SetNewFlightScreen(newFlight));
                     break;
 
                 case MENU_SEARCH_FLIGHT:
