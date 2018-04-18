@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="DataManagers\FlightDataManager.cs" />
     <Compile Include="DataManagers\ReservationDataManager.cs" />
+    <Compile Include="Helpers\PNRGenerator.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="Models\Flight.cs" />
     <Compile Include="Models\Passenger.cs" />

@@ -1,4 +1,5 @@
-﻿using CaseStudy.Models;
+﻿using CaseStudy.Helpers;
+using CaseStudy.Models;
 using System;
 using System.Collections.Generic;
 
@@ -32,7 +33,7 @@ namespace CaseStudy.DataManagers
 
         private void CreateDummyReservations()
         {
-            Reservation reservation = new Reservation();
+            Reservation reservation = CreateReservation();
             reservation.flight = new Flight();
             reservation.flight.AirlineCode = "NV";
             reservation.flight.FlightNumber = 100;
@@ -48,7 +49,7 @@ namespace CaseStudy.DataManagers
             reservation.AddPassenger(passenger);
             reservations.Add(reservation);
 
-            reservation = new Reservation();
+            reservation = CreateReservation();
             reservation.flight = new Flight();
             reservation.flight.AirlineCode = "NV";
             reservation.flight.FlightNumber = 101;
@@ -66,8 +67,8 @@ namespace CaseStudy.DataManagers
 
         public Reservation CreateReservation()
         {
-            Reservation reservation = new Reservation();
-            reservation.SetPNR(GeneratePNR());
+            string generatedPNR = PNRGenerator.Get(new Random((int)(DateTime.Now.Ticks % int.MaxValue)));
+            Reservation reservation = new Reservation(generatedPNR);
             return reservation;
         }
 
@@ -90,11 +91,6 @@ namespace CaseStudy.DataManagers
 
             this.reservations.Add(reservation);
             //TODO: Save Reservations to text file.
-        }
-
-        private string GeneratePNR()
-        {
-            return "GeneratedPNR";
         }
     }
 }

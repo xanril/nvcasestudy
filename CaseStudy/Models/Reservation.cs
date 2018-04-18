@@ -22,20 +22,15 @@ namespace CaseStudy.Models
             get; private set;
         }
 
-        public Reservation()
+        public Reservation(string generatedPNR)
         {
             this.passengers = new List<Passenger>();
-            this.PNR = "GENERATE PLS";
+            this.PNR = generatedPNR;
         }
 
         public void AddPassenger(Passenger passenger)
         {
             passengers.Add(passenger);
-        }
-
-        public void SetPNR(string generatedPNR)
-        {
-            this.PNR = generatedPNR;
         }
 
         public string GetInfo()
