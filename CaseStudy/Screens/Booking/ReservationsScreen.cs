@@ -13,16 +13,16 @@ namespace CaseStudy.Booking.Screens
 
         public void Display()
         {
-            Console.WriteLine("RESERVATIONS");
+            Console.WriteLine("\nRESERVATIONS");
             Console.WriteLine("[" + MENU_BOOK_FLIGHT + "] Book a Flight");
             Console.WriteLine("[" + MENU_LIST_RESERVATIONS + "] List All Reservations");
             Console.WriteLine("[" + MENU_SEARCH_PNR + "] Search By PNR");
             Console.WriteLine("[" + MENU_BACK + "] Back to Main Menu");
+            Console.WriteLine("");
         }
 
         public void ShowInputPrompt()
         {
-            Console.WriteLine("");
             Console.Write("Select Item: ");
         }
 
@@ -31,19 +31,19 @@ namespace CaseStudy.Booking.Screens
             switch (userInput)
             {
                 case MENU_BOOK_FLIGHT:
-                    Console.WriteLine("Book a Flight selected.\n");
+                    Console.WriteLine("Book a Flight selected.");
                     Reservation reservation = DataManager.GetInstance().CreateReservation();
                     ScreenManager.GetInstance().PushScreen(new SelectFlightScreen(reservation));
                     break;
 
                 case MENU_LIST_RESERVATIONS:
-                    Console.WriteLine("List All Reservations selected.\n");
+                    Console.WriteLine("List All Reservations selected.");
                     ListReservationsScreen listReservationsScreen = new ListReservationsScreen(DataManager.GetInstance().Reservations);
                     ScreenManager.GetInstance().PushScreen(listReservationsScreen);
                     break;
 
                 case MENU_SEARCH_PNR:
-                    Console.WriteLine("Search By PNR selected.\n");
+                    Console.WriteLine("Search By PNR selected.");
                     ScreenManager.GetInstance().PushScreen(new SearchPNRScreen());
                     break;
 

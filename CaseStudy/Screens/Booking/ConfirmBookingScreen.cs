@@ -18,8 +18,10 @@ namespace CaseStudy.Booking.Screens
 
         public void Display()
         {
-            Console.WriteLine("RESERVATIONS > BOOKING SUMMARY");
-            Console.WriteLine(reservation.GetInfo());
+            Console.WriteLine("\nRESERVATIONS > BOOKING SUMMARY");
+            Console.WriteLine("---------------------------------------------------");
+            Console.Write(reservation.GetInfo());
+            Console.WriteLine("---------------------------------------------------");
             Console.WriteLine("");
         }
 

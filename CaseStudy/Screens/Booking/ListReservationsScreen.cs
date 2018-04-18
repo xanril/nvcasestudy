@@ -17,7 +17,7 @@ namespace CaseStudy.Booking.Screens
 
         public void Display()
         {
-            Console.WriteLine("RESERVATIONS > LIST RESERVATIONS");
+            Console.WriteLine("\nRESERVATIONS > LIST RESERVATIONS");
             Console.WriteLine("");
 
             if (this.reservations.Count<Reservation>() == 0)
@@ -26,21 +26,35 @@ namespace CaseStudy.Booking.Screens
             }
             else
             {
-                foreach(Reservation reservation in reservations)
+                Console.WriteLine("Reservation record/s found.");
+                Console.WriteLine("---------------------------------------------------");
+                bool hasPassed = false;
+                foreach (Reservation reservation in reservations)
                 {
-                    Console.WriteLine(reservation.GetInfo());
-                }
+                    if (hasPassed)
+                    {
+                        Console.Write("\n" + reservation.GetInfo());
+                    }
+                    else
+                    {
+                        Console.Write(reservation.GetInfo());
+                        hasPassed = true;
+                    }   
+                }  
+                Console.WriteLine("---------------------------------------------------");
             }
+
+            Console.WriteLine("");
         }
 
         public void ShowInputPrompt()
         {
-            Console.WriteLine("Press any key to continue.");
+            Console.Write("Press any key to continue.");
         }
 
         public void ProcessInput(string userInput)
         {
-            ScreenManager.GetInstance().PopScreenUntilTargetType(typeof(ReservationsScreen));
+            ScreenManager.GetInstance().PopScreen();
         }
     }
 }

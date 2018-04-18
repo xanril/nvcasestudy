@@ -25,7 +25,7 @@ namespace CaseStudy.Models
         public Reservation()
         {
             this.passengers = new List<Passenger>();
-            this.PNR = "generate pls";
+            this.PNR = "GENERATE PLS";
         }
 
         public void AddPassenger(Passenger passenger)
