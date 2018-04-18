@@ -19,12 +19,15 @@ namespace CaseStudy.Booking.Screens
         private Reservation reservation;
         private Passenger passenger;
         private SetPassengerStates currState = SetPassengerStates.StateMaxCount;
-        
+        private int targetPassengerCount;
+        private int currentPassenger;
 
         public SetFlightPassengersScreen(Reservation reservation)
         {
             this.reservation = reservation;
             passenger = new Passenger();
+            targetPassengerCount = 1;
+            currentPassenger = 1;
         }
 
         public void Display()
@@ -41,15 +44,15 @@ namespace CaseStudy.Booking.Screens
                     break;
 
                 case SetPassengerStates.StateFirstName:
-                    Console.Write("First Name: ");
+                    Console.Write("\n[Passenger {0}] First Name: ", currentPassenger);
                     break;
 
                 case SetPassengerStates.StateLastName:
-                    Console.Write("Last Name: ");
+                    Console.Write("[Passenger {0}] Last Name: ", currentPassenger);
                     break;
 
                 case SetPassengerStates.StateBirthday:
-                    Console.Write("Birthday (MM/DD/YYYY): ");
+                    Console.Write("[Passenger {0}] Birthday (MM/DD/YYYY): ", currentPassenger);
                     break;
             }
         }
@@ -63,15 +66,12 @@ namespace CaseStudy.Booking.Screens
                     int passengerCount = 0;
                     if(int.TryParse(userInput, out passengerCount))
                     {
-                        try
-                        {
-                            reservation.PassengerCount = passengerCount;
-                            currState = SetPassengerStates.StateFirstName;
-                        }
-                        catch(Exception ex)
-                        {
-                            Console.WriteLine(ex.Message);
-                        }
+                        this.targetPassengerCount = passengerCount;
+                        currState = SetPassengerStates.StateFirstName;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Passenger count should be numeric");
                     }
                    break;
 
@@ -111,8 +111,9 @@ namespace CaseStudy.Booking.Screens
                         {
                             passenger.Birthdate = birthdate;
                             reservation.AddPassenger(passenger);
+                            Console.WriteLine("[Passenger {0}] Added - " + passenger.GetInfo(), currentPassenger);
 
-                            if(reservation.Passengers.Count<Passenger>() == reservation.PassengerCount)
+                            if(reservation.Passengers.Count<Passenger>() == targetPassengerCount)
                             {
                                 ScreenManager.GetInstance().PushScreen(new ConfirmBookingScreen(reservation));
                             }
@@ -120,6 +121,7 @@ namespace CaseStudy.Booking.Screens
                             {
                                 passenger = new Passenger();
                                 currState = SetPassengerStates.StateFirstName;
+                                currentPassenger = currentPassenger + 1;
                             }
                         }
                         catch (Exception ex)
