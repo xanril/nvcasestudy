@@ -105,5 +105,11 @@ namespace CaseStudy.Models
             string infoString = GetFlightDesignator() + "\t" + GetMarket() + "   " + GetSchedule();
             Console.WriteLine(infoString);
         }
+
+        public string GetInfo()
+        {
+            string infoString = GetFlightDesignator() + "\t" + GetMarket() + "   " + GetSchedule();
+            return infoString;
+        }
     }
 }
