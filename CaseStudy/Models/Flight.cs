@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CaseStudy.Models
 {
-    class Flight
+    public class Flight
     {
         private const int MAX_AIRLINE_CODE_LENGTH = 2;
 
