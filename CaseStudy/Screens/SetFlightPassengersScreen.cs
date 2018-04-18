@@ -1,9 +1,6 @@
 ﻿using CaseStudy.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CaseStudy.Screens
 {
@@ -14,7 +11,8 @@ namespace CaseStudy.Screens
             StateMaxCount = 0,
             StateFirstName,
             StateLastName,
-            StateBirthday
+            StateBirthday,
+            StateEnd
         }
 
         private Reservation reservation;
@@ -47,6 +45,10 @@ namespace CaseStudy.Screens
 
                 case SetPassengerStates.StateLastName:
                     Console.Write("Last Name: ");
+                    break;
+
+                case SetPassengerStates.StateBirthday:
+                    Console.Write("Birthday (MM/DD/YYYY): ");
                     break;
             }
         }
@@ -96,7 +98,45 @@ namespace CaseStudy.Screens
                         Console.WriteLine(ex.Message);
                     }
                     break;
+
+                case SetPassengerStates.StateBirthday:
+
+                    userInput = userInput.Trim();
+                    DateTime birthdate = DateTime.Now;
+
+                    if (DateTime.TryParse(userInput, out birthdate))
+                    {
+                        try
+                        {
+                            passenger.Birthdate = birthdate;
+                            reservation.AddPassenger(passenger);
+
+                            if(reservation.Passengers.Count<Passenger>() == reservation.PassengerCount)
+                            {
+                                ChangeToSummaryScreen();
+                            }
+                            else
+                            {
+                                passenger = new Passenger();
+                                currState = SetPassengerStates.StateFirstName;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Cannot recognize Date Format. Please try again.");
+                    }
+                    break;
             }
+        }
+
+        private void ChangeToConfirmBookingScreen()
+        {
+            //TODO: Implement change to confirm booking screen
         }
     }
 }
