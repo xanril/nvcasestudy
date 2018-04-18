@@ -16,25 +16,19 @@ namespace CaseStudy.Maintenance.Screens
 
         public void Display()
         {
-            Console.WriteLine("FLIGHT MAINTENANCE > SEARCH FLIGHT > BY ORIGIN / DESTINATION");
+            Console.WriteLine("\nFLIGHT MAINTENANCE > SEARCH FLIGHT > BY ORIGIN / DESTINATION");
         }
 
         public void ShowInputPrompt()
         {
-            Console.WriteLine("");
-            Console.Write("Enter Origin / Destination Code or 'X' to go back: ");
+            Console.Write("Enter Origin / Destination Code: ");
         }
 
         public void ProcessInput(string userInput)
         {
             userInput = userInput.ToUpper();
-            if (userInput == "X")
-            {
-                Console.WriteLine("Back To Menu selected.\n");
-                ScreenManager.GetInstance().PopScreen();
-                return;
-            }
 
+            // TODO: Move search method to manager
             List<Flight> resultFlights = flights.FindAll(m => m.ArrivalStation == userInput || m.DepartureStation == userInput);
             if (resultFlights == null || resultFlights.Count == 0)
             {
@@ -43,10 +37,14 @@ namespace CaseStudy.Maintenance.Screens
             else
             {
                 Console.WriteLine("Flight record/s found.");
+                Console.WriteLine("---------------------------------------------------");
                 foreach (Flight flight in resultFlights)
                 {
                     flight.PrintInfo();
                 }
+                Console.WriteLine("---------------------------------------------------");
+
+                ScreenManager.GetInstance().PopScreen();
             }
         }
     }

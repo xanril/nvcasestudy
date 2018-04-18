@@ -12,15 +12,15 @@ namespace CaseStudy.Maintenance.Screens
 
         public void Display()
         {
-            Console.WriteLine("FLIGHT MAINTENANCE");
+            Console.WriteLine("\nFLIGHT MAINTENANCE");
             Console.WriteLine("[" + MENU_ADD_FLIGHT + "] Add Flight");
             Console.WriteLine("[" + MENU_SEARCH_FLIGHT + "] Search Flight");
             Console.WriteLine("[" + MENU_BACK + "] Back to Main Menu");
+            Console.WriteLine("");
         }
 
         public void ShowInputPrompt()
         {
-            Console.WriteLine("");
             Console.Write("Select Item: ");
         }
 
@@ -29,18 +29,18 @@ namespace CaseStudy.Maintenance.Screens
             switch (userInput)
             {
                 case MENU_ADD_FLIGHT:
-                    Console.WriteLine("Add Flight selected.\n");
+                    Console.WriteLine("Add Flight selected.");
                     Flight newFlight = DataManager.GetInstance().CreateFlight();
                     ScreenManager.GetInstance().PushScreen(new SetAirlineCodeScreen(newFlight));
                     break;
 
                 case MENU_SEARCH_FLIGHT:
-                    Console.WriteLine("Search Flight selected.\n");
+                    Console.WriteLine("Search Flight selected.");
                     ScreenManager.GetInstance().PushScreen(new SearchFlightScreen());
                     break;
 
                 case MENU_BACK:
-                    Console.WriteLine("Back To Menu selected.\n");
+                    Console.WriteLine("Back To Menu selected.");
                     ScreenManager.GetInstance().PopScreen();
                     break;
 

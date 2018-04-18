@@ -16,30 +16,22 @@ namespace CaseStudy.Maintenance.Screens
 
         public void Display()
         {
-            Console.WriteLine("FLIGHT MAINTENANCE > SEARCH FLIGHT > BY FLIGHT NUMBER");
+            Console.WriteLine("\nFLIGHT MAINTENANCE > SEARCH FLIGHT > BY FLIGHT NUMBER");
         }
 
         public void ShowInputPrompt()
         {
-            Console.WriteLine("");
-            Console.Write("Enter Flight Number or 'X' to go back: ");
+            Console.Write("Flight Number: ");
         }
 
         public void ProcessInput(string userInput)
         {
-            userInput = userInput.ToUpper();
-            if(userInput == "X")
-            {
-                Console.WriteLine("Back To Menu selected.\n");
-                ScreenManager.GetInstance().PopScreen();
-                return;
-            }
-
             int parsedFlightNumber = -1; 
             bool parseResult = int.TryParse(userInput, out parsedFlightNumber);
 
             if(parseResult)
             {
+                // TODO: Move search function to manager
                 List<Flight> resultFlights = flights.FindAll(m => m.FlightNumber == parsedFlightNumber);
                 if (resultFlights == null || resultFlights.Count == 0)
                 {
@@ -48,15 +40,19 @@ namespace CaseStudy.Maintenance.Screens
                 else
                 {
                     Console.WriteLine("Flight record/s found.");
+                    Console.WriteLine("---------------------------------------------------");
                     foreach (Flight flight in resultFlights)
                     {
                         flight.PrintInfo();
                     }
+                    Console.WriteLine("---------------------------------------------------");
+
+                    ScreenManager.GetInstance().PopScreen();
                 }
             }
             else
             {
-                Console.WriteLine("Your input is invalid. Please try again.");
+                Console.WriteLine("Flight Numbers should only be numeric.");
             }
         }
     }

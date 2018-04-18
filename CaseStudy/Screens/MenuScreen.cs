@@ -16,11 +16,11 @@ namespace CaseStudy.Screens
             Console.WriteLine("[" + MENU_FLIGHT_MAINTENANCE + "] Go to Flight Maintenance Screen");
             Console.WriteLine("[" + MENU_RESERVATION + "] Go to Reservation Screen");
             Console.WriteLine("[" + MENU_EXIT + "] Exit");
+            Console.WriteLine("");
         }
 
         public void ShowInputPrompt()
         {
-            Console.WriteLine("");
             Console.Write("Select Item: ");
         }
 
