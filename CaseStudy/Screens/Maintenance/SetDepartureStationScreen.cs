@@ -1,9 +1,10 @@
 ﻿using CaseStudy.Models;
+using CaseStudy.Screens;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace CaseStudy.Screens
+namespace CaseStudy.Maintenance.Screens
 {
     class SetDepartureStationScreen : IScreen
     {

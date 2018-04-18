@@ -1,16 +1,17 @@
 ﻿using CaseStudy.Models;
+using CaseStudy.Screens;
 using System;
 using System.Collections.Generic;
 
-namespace CaseStudy.Screens
+namespace CaseStudy.Maintenance.Screens
 {
     class SearchMarketScreen : IScreen
     {
-        private List<Flight> _flights;
+        private List<Flight> flights;
 
         public SearchMarketScreen()
         {
-            _flights = new List<Flight>(DataManager.GetInstance().GetFlights());
+            flights = new List<Flight>(DataManager.GetInstance().GetFlights());
         }
 
         public void Display()
@@ -34,7 +35,7 @@ namespace CaseStudy.Screens
                 return;
             }
 
-            List<Flight> resultFlights = _flights.FindAll(m => m.ArrivalStation == userInput || m.DepartureStation == userInput);
+            List<Flight> resultFlights = flights.FindAll(m => m.ArrivalStation == userInput || m.DepartureStation == userInput);
             if (resultFlights == null || resultFlights.Count == 0)
             {
                 Console.WriteLine("No flight record found.");

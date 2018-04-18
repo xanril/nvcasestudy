@@ -47,7 +47,7 @@ namespace CaseStudy.Screens
                     }
                     catch(Exception ex)
                     {
-                        Console.WriteLine("There was an error creating a booking. Please try again.");
+                        Console.WriteLine(ex.Message);
                     }
                     break;
 

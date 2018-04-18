@@ -1,7 +1,8 @@
 ﻿using CaseStudy.Models;
+using CaseStudy.Screens;
 using System;
 
-namespace CaseStudy.Screens
+namespace CaseStudy.Maintenance.Screens
 {
     class AddNewFlightScreen : IScreen
     {

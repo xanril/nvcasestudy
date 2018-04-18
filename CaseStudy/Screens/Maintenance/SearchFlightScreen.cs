@@ -1,6 +1,8 @@
-﻿using System;
+﻿using CaseStudy.Maintenance.Screens;
+using CaseStudy.Screens;
+using System;
 
-namespace CaseStudy.Screens
+namespace CaseStudy.Maintenance.Screens
 {
     class SearchFlightScreen : IScreen
     {
