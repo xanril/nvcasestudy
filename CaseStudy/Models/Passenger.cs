@@ -41,11 +41,10 @@ namespace CaseStudy.Models
             }
         }
 
-        // Should not be a future date
-        private DateTime birthday;
-        public DateTime Birthday
+        private DateTime birthdate;
+        public DateTime Birthdate
         {
-            get { return birthday; }
+            get { return birthdate; }
             set
             {
                 birthday = value;
