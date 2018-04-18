@@ -1,61 +1,59 @@
 ﻿using CaseStudy.Models;
+using CaseStudy.Screens;
 using System;
 using System.Collections.Generic;
 
-namespace CaseStudy.Screens
+namespace CaseStudy.Maintenance.Screens
 {
     class SearchFlightNumberScreen : IScreen
     {
-        private List<Flight> _flights;
+        private List<Flight> flights;
 
         public SearchFlightNumberScreen()
         {
-            _flights = new List<Flight>(DataManager.GetInstance().GetFlights());
+            flights = new List<Flight>(DataManager.GetInstance().GetFlights());
         }
 
         public void Display()
         {
-            Console.WriteLine("FLIGHT MAINTENANCE > SEARCH FLIGHT > BY FLIGHT NUMBER");
+            Console.WriteLine("\nFLIGHT MAINTENANCE > SEARCH FLIGHT > BY FLIGHT NUMBER");
         }
 
         public void ShowInputPrompt()
         {
-            Console.WriteLine("");
-            Console.Write("Enter Flight Number or 'X' to go back: ");
+            Console.Write("Flight Number: ");
         }
 
         public void ProcessInput(string userInput)
         {
-            userInput = userInput.ToUpper();
-            if(userInput == "X")
-            {
-                Console.WriteLine("Back To Menu selected.\n");
-                ScreenManager.GetInstance().PopScreen();
-                return;
-            }
-
             int parsedFlightNumber = -1; 
             bool parseResult = int.TryParse(userInput, out parsedFlightNumber);
 
             if(parseResult)
             {
-                List<Flight> resultFlights = _flights.FindAll(m => m.FlightNumber == parsedFlightNumber);
+                // TODO: Move search function to manager
+                List<Flight> resultFlights = flights.FindAll(m => m.FlightNumber == parsedFlightNumber);
                 if (resultFlights == null || resultFlights.Count == 0)
                 {
                     Console.WriteLine("No flight record found.");
+                    ScreenManager.GetInstance().PopScreen();
                 }
                 else
                 {
                     Console.WriteLine("Flight record/s found.");
+                    Console.WriteLine("---------------------------------------------------");
                     foreach (Flight flight in resultFlights)
                     {
                         flight.PrintInfo();
                     }
+                    Console.WriteLine("---------------------------------------------------");
+
+                    ScreenManager.GetInstance().PopScreen();
                 }
             }
             else
             {
-                Console.WriteLine("Your input is invalid. Please try again.");
+                Console.WriteLine("Flight Numbers should only be numeric.");
             }
         }
     }

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using CaseStudy.Maintenance.Screens;
+using CaseStudy.Screens;
+using System;
 
-namespace CaseStudy.Screens
+namespace CaseStudy.Maintenance.Screens
 {
     class SearchFlightScreen : IScreen
     {
@@ -11,10 +13,10 @@ namespace CaseStudy.Screens
 
         public void Display()
         {
-            Console.WriteLine("FLIGHT MAINTENANCE > SEARCH FLIGHT");
-            Console.WriteLine("[" + MENU_SEARCH_BY_FLIGHT_NUMBER + "] Search By Flight Number");
-            Console.WriteLine("[" + MENU_SEARCH_BY_AIRLINE_CODE + "] Search Airline Code");
-            Console.WriteLine("[" + MENU_SEARCH_BY_MARKET + "] Search By Origin / Destination");
+            Console.WriteLine("\nFLIGHT MAINTENANCE > SEARCH FLIGHT");
+            Console.WriteLine("[" + MENU_SEARCH_BY_FLIGHT_NUMBER + "] By Flight Number");
+            Console.WriteLine("[" + MENU_SEARCH_BY_AIRLINE_CODE + "] Airline Code");
+            Console.WriteLine("[" + MENU_SEARCH_BY_MARKET + "] By Origin / Destination");
             Console.WriteLine("[" + MENU_BACK_TO_MENU + "] Back to Menu");
         }
 
@@ -29,22 +31,22 @@ namespace CaseStudy.Screens
             switch (userInput)
             {
                 case MENU_SEARCH_BY_FLIGHT_NUMBER:
-                    Console.WriteLine("Search By Flight Number selected.\n");
+                    Console.WriteLine("Search By Flight Number selected.");
                     ScreenManager.GetInstance().PushScreen(new SearchFlightNumberScreen());
                     break;
 
                 case MENU_SEARCH_BY_AIRLINE_CODE:
-                    Console.WriteLine("Search By Airline Code selected.\n");
+                    Console.WriteLine("Search By Airline Code selected.");
                     ScreenManager.GetInstance().PushScreen(new SearchAirlineCodeScreen());
                     break;
 
                 case MENU_SEARCH_BY_MARKET:
-                    Console.WriteLine("Search By Origin / Destination selected.\n");
+                    Console.WriteLine("Search By Origin / Destination selected.");
                     ScreenManager.GetInstance().PushScreen(new SearchMarketScreen());
                     break;
 
                 case MENU_BACK_TO_MENU:
-                    Console.WriteLine("Back To Menu selected.\n");
+                    Console.WriteLine("Back To Menu selected.");
                     ScreenManager.GetInstance().PopScreen();
                     break;
 

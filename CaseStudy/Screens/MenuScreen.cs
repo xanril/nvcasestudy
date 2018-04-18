@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CaseStudy.Booking.Screens;
+using CaseStudy.Maintenance.Screens;
+using System;
 
 namespace CaseStudy.Screens
 {
@@ -14,11 +16,11 @@ namespace CaseStudy.Screens
             Console.WriteLine("[" + MENU_FLIGHT_MAINTENANCE + "] Go to Flight Maintenance Screen");
             Console.WriteLine("[" + MENU_RESERVATION + "] Go to Reservation Screen");
             Console.WriteLine("[" + MENU_EXIT + "] Exit");
+            Console.WriteLine("");
         }
 
         public void ShowInputPrompt()
         {
-            Console.WriteLine("");
             Console.Write("Select Item: ");
         }
 
@@ -27,12 +29,12 @@ namespace CaseStudy.Screens
             switch (userInput)
             {
                 case MENU_FLIGHT_MAINTENANCE:
-                    Console.WriteLine("Flight Maintenance Selected.\n");
+                    Console.WriteLine("Flight Maintenance Selected.");
                     ScreenManager.GetInstance().PushScreen(new FlightMaintenanceScreen());
                     break;
 
                 case MENU_RESERVATION:
-                    Console.WriteLine("Reservations Selected.\n");
+                    Console.WriteLine("Reservations Selected.");
                     ScreenManager.GetInstance().PushScreen(new ReservationsScreen());
                     break;
 

@@ -1,11 +1,8 @@
 ﻿using CaseStudy.Models;
+using CaseStudy.Screens;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CaseStudy.Screens
+namespace CaseStudy.Booking.Screens
 {
     class ConfirmBookingScreen : IScreen
     {
@@ -47,7 +44,7 @@ namespace CaseStudy.Screens
                     }
                     catch(Exception ex)
                     {
-                        Console.WriteLine("There was an error creating a booking. Please try again.");
+                        Console.WriteLine(ex.Message);
                     }
                     break;
 
