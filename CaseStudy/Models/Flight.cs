@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CaseStudy.Helpers;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace CaseStudy.Models
@@ -8,10 +9,22 @@ namespace CaseStudy.Models
         private const int MAX_AIRLINE_CODE_LENGTH = 2;
 
         // Possible to extend to 3 chars max
+        private string airlineCode;
         [Required(ErrorMessage = "Airline Code cannot be null.")]
         [StringLength(2, MinimumLength = 2, ErrorMessage = "Airline Code should be exactly 2 alphanumeric characters.")]
         [RegularExpression("[A-Z,a-z][0-9]|[0-9][A-Z,a-z]|[A-Z,a-z][A-Z,a-z]", ErrorMessage = "Airline Code cannot be both numbers.")]
-        public string AirlineCode { get; set; }
+        public string AirlineCode
+        {
+            get { return airlineCode; }
+            set
+            {
+                ValidationHelperResult validationResult = ValidationHelper.ValidateProperty<Flight>(this, nameof(AirlineCode), value);
+                if (validationResult.IsValid)
+                    throw new Exception(validationResult.GetErrorMessages());
+
+                airlineCode = value;
+            }
+        }
 
         // Required
         [Range(minimum:1, maximum:9999, ErrorMessage = "Flight Number should be between the range of 1 to 9999.")]
