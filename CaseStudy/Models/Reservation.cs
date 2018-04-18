@@ -6,7 +6,7 @@ using System;
 
 namespace CaseStudy.Models
 {
-    class Reservation
+    public class Reservation
     {
         public Flight flight;
 

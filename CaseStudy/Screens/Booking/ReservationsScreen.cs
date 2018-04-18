@@ -1,4 +1,5 @@
-﻿using CaseStudy.Models;
+﻿using CaseStudy.DataManagers;
+using CaseStudy.Models;
 using CaseStudy.Screens;
 using System;
 
@@ -32,13 +33,13 @@ namespace CaseStudy.Booking.Screens
             {
                 case MENU_BOOK_FLIGHT:
                     Console.WriteLine("Book a Flight selected.");
-                    Reservation reservation = DataManager.GetInstance().CreateReservation();
+                    Reservation reservation = ReservationDataManager.Instance.CreateReservation();
                     ScreenManager.GetInstance().PushScreen(new SelectFlightScreen(reservation));
                     break;
 
                 case MENU_LIST_RESERVATIONS:
                     Console.WriteLine("List All Reservations selected.");
-                    ListReservationsScreen listReservationsScreen = new ListReservationsScreen(DataManager.GetInstance().Reservations);
+                    ListReservationsScreen listReservationsScreen = new ListReservationsScreen(ReservationDataManager.Instance.GetReservations());
                     ScreenManager.GetInstance().PushScreen(listReservationsScreen);
                     break;
 

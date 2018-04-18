@@ -21,7 +21,7 @@ namespace CaseStudy.DataManagers
         private const string AIRLINE_CODE = "NV";
         private List<Flight> flights;
 
-        public FlightDataManager()
+        private FlightDataManager()
         {
             flights = new List<Flight>();
         }

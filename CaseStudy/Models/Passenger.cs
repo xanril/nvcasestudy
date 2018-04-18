@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CaseStudy.Models
 {
-    class Passenger
+    public class Passenger
     {
         private string firstName;
 
