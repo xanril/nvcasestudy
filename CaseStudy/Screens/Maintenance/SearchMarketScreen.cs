@@ -1,4 +1,5 @@
-﻿using CaseStudy.Models;
+﻿using CaseStudy.DataManagers;
+using CaseStudy.Models;
 using CaseStudy.Screens;
 using System;
 using System.Collections.Generic;
@@ -7,13 +8,6 @@ namespace CaseStudy.Maintenance.Screens
 {
     class SearchMarketScreen : IScreen
     {
-        private List<Flight> flights;
-
-        public SearchMarketScreen()
-        {
-            flights = new List<Flight>(DataManager.GetInstance().GetFlights());
-        }
-
         public void Display()
         {
             Console.WriteLine("\nFLIGHT MAINTENANCE > SEARCH FLIGHT > BY ORIGIN / DESTINATION");
@@ -28,9 +22,8 @@ namespace CaseStudy.Maintenance.Screens
         {
             userInput = userInput.ToUpper();
 
-            // TODO: Move search method to manager
-            List<Flight> resultFlights = flights.FindAll(m => m.ArrivalStation == userInput || m.DepartureStation == userInput);
-            if (resultFlights == null || resultFlights.Count == 0)
+            Flight[] resultFlights = FlightDataManager.Instance.FindFlightsWithStation(userInput);
+            if (resultFlights == null || resultFlights.Length == 0)
             {
                 Console.WriteLine("No flight record found.");
                 ScreenManager.GetInstance().PopScreen();

@@ -1,4 +1,5 @@
-﻿using CaseStudy.Models;
+﻿using CaseStudy.DataManagers;
+using CaseStudy.Models;
 using CaseStudy.Screens;
 using System;
 
@@ -9,6 +10,7 @@ namespace CaseStudy
         static void Main(string[] args)
         {
             DataManager.GetInstance().LoadData();
+            FlightDataManager.Instance.LoadData();
 
             Console.WriteLine("Welcome to Airline X Flight Management System!");
             Console.WriteLine("");

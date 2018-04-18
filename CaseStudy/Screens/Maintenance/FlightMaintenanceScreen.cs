@@ -1,4 +1,5 @@
-﻿using CaseStudy.Models;
+﻿using CaseStudy.DataManagers;
+using CaseStudy.Models;
 using CaseStudy.Screens;
 using System;
 
@@ -30,7 +31,7 @@ namespace CaseStudy.Maintenance.Screens
             {
                 case MENU_ADD_FLIGHT:
                     Console.WriteLine("Add Flight selected.");
-                    Flight newFlight = DataManager.GetInstance().CreateFlight();
+                    Flight newFlight = FlightDataManager.Instance.CreateFlight();
                     ScreenManager.GetInstance().PushScreen(new SetNewFlightScreen(newFlight));
                     break;
 

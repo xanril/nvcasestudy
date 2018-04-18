@@ -1,4 +1,5 @@
-﻿using CaseStudy.Models;
+﻿using CaseStudy.DataManagers;
+using CaseStudy.Models;
 using CaseStudy.Screens;
 using System;
 
@@ -19,7 +20,7 @@ namespace CaseStudy.Maintenance.Screens
 
             try
             {
-                DataManager.GetInstance().AddFlight(flight);
+                FlightDataManager.Instance.AddFlight(flight);
 
                 Console.WriteLine("New Flight added.");
                 Console.WriteLine(flight.GetInfo());
