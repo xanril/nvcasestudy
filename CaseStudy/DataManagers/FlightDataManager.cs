@@ -1,6 +1,8 @@
 ﻿using CaseStudy.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace CaseStudy.DataManagers
 {
@@ -19,6 +21,8 @@ namespace CaseStudy.DataManagers
         }
 
         private const string AIRLINE_CODE = "NV";
+        private const string FILE_SAVE_PATH = "C:\\Users\\kmitra\\Documents";
+        private const string FILENAME = "FlightData.json";
         private List<Flight> flights;
 
         private FlightDataManager()
@@ -28,7 +32,23 @@ namespace CaseStudy.DataManagers
 
         public void LoadData()
         {
-            CreateDummyFlights();
+            using (StreamReader streamReader = new StreamReader(Path.Combine(FILE_SAVE_PATH, FILENAME)))
+            {
+                string fileContents = streamReader.ReadToEnd();
+                this.flights = JsonConvert.DeserializeObject<List<Flight>>(fileContents);
+            }
+        }
+
+        private void SaveData()
+        {
+            using (StreamWriter sw = new StreamWriter(Path.Combine(FILE_SAVE_PATH, FILENAME), false))
+            {
+                using (JsonWriter writer = new JsonTextWriter(sw))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Serialize(writer, this.flights);
+                }
+            }
         }
 
         private void CreateDummyFlights()
@@ -69,6 +89,8 @@ namespace CaseStudy.DataManagers
             }
 
             this.flights.Add(flight);
+
+            SaveData();
         }
 
         public Flight FindFlight(string airlinecode, int flightNumber)
