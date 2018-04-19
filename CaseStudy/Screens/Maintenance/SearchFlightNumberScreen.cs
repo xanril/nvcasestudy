@@ -1,53 +1,28 @@
-﻿using CaseStudy.DataManagers;
+﻿using CaseStudy.Abstracts;
+using CaseStudy.DataManagers;
 using CaseStudy.Models;
 using CaseStudy.Screens;
+using CaseStudy.Views.Maintenance;
 using System;
 using System.Collections.Generic;
 
-namespace CaseStudy.Maintenance.Screens
+namespace CaseStudy.Screens.Maintenance
 {
-    class SearchFlightNumberScreen : IScreen
+    class SearchFlightNumberScreen : AbstractPresenter
     {
-        public void Display()
+        public SearchFlightNumberScreen()
         {
-            Console.WriteLine("\nFLIGHT MAINTENANCE > SEARCH FLIGHT > BY FLIGHT NUMBER");
+            this.view = new SearchFlightNumberView(this);
+            ScreenManager.GetInstance().SetActiveView(this.view);
         }
 
-        public void ShowInputPrompt()
+        public void SearchFlightsByFlightNumber(int flightNumber)
         {
-            Console.Write("Flight Number: ");
-        }
+            IEnumerable<Flight> resultFlights = FlightDataManager.Instance.FindFlightsByFlightNumber(flightNumber);
+            SearchFlightNumberView actualView = (SearchFlightNumberView)this.view;
+            actualView.ShowSearchResults(resultFlights);
 
-        public void ProcessInput(string userInput)
-        {
-            int parsedFlightNumber = -1; 
-            bool parseResult = int.TryParse(userInput, out parsedFlightNumber);
-
-            if(parseResult)
-            {
-                Flight[] resultFlights = FlightDataManager.Instance.FindFlightsByFlightNumber(parsedFlightNumber);
-                if (resultFlights == null || resultFlights.Length == 0)
-                {
-                    Console.WriteLine("No flight record found.");
-                    ScreenManager.GetInstance().PopScreen();
-                }
-                else
-                {
-                    Console.WriteLine("Flight record/s found.");
-                    Console.WriteLine("---------------------------------------------------");
-                    foreach (Flight flight in resultFlights)
-                    {
-                        Console.WriteLine(flight.ToString());
-                    }
-                    Console.WriteLine("---------------------------------------------------");
-
-                    ScreenManager.GetInstance().PopScreen();
-                }
-            }
-            else
-            {
-                Console.WriteLine("Flight Numbers should only be numeric.");
-            }
+            ScreenManager.GetInstance().SetActivePresenter(new SearchFlightScreen());
         }
     }
 }

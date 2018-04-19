@@ -115,13 +115,13 @@ namespace CaseStudy.DataManagers
             return flight;
         }
 
-        public Flight[] FindFlightsByAirlineCode(string airlineCode)
+        public IEnumerable<Flight> FindFlightsByAirlineCode(string airlineCode)
         {
             List<Flight> resultFlights = flights.FindAll(m => m.AirlineCode == airlineCode);
             return resultFlights.ToArray();
         }
 
-        public Flight[] FindFlightsByFlightNumber(int flightNumber)
+        public IEnumerable<Flight> FindFlightsByFlightNumber(int flightNumber)
         {
             List<Flight> resultFlights = flights.FindAll(m => m.FlightNumber == flightNumber);
             return resultFlights.ToArray();

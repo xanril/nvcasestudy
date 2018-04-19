@@ -57,6 +57,8 @@ namespace CaseStudy.Screens
             } while (this.viewStack.Count != 0);
         }
 
+        // ----------------------------
+
         public void PopScreen()
         {
             this.viewStack.Pop();

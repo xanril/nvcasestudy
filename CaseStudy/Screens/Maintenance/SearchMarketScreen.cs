@@ -1,19 +1,24 @@
-﻿using CaseStudy.DataManagers;
+﻿using CaseStudy.Abstracts;
+using CaseStudy.DataManagers;
 using CaseStudy.Helpers;
 using CaseStudy.Models;
 using CaseStudy.Screens;
+using CaseStudy.Screens.Maintenance;
+using CaseStudy.Views.Maintenance;
 using System;
 using System.Collections.Generic;
 
 namespace CaseStudy.Maintenance.Screens
 {
-    class SearchMarketScreen : IScreen
+    class SearchMarketScreen : AbstractPresenter
     {
         private Flight tempFlight;
 
         public SearchMarketScreen()
         {
             this.tempFlight = FlightDataManager.Instance.CreateFlight();
+            this.view = new SearchMarketView(this, tempFlight);
+            ScreenManager.GetInstance().SetActiveView(this.view);
         }
 
         public void Display()
@@ -26,36 +31,14 @@ namespace CaseStudy.Maintenance.Screens
             Console.Write("Enter Origin / Destination Code: ");
         }
 
-        public void ProcessInput(string userInput)
+        public void SearchFlightsByStationCode(string stationCode)
         {
-            userInput = userInput.ToUpper();
-            ValidationHelperResult validationResult = null;
+            IEnumerable<Flight> resultFlights = FlightDataManager.Instance.FindFlightsWithStation(stationCode);
+            SearchMarketView actualView = (SearchMarketView)this.view;
+            actualView.ShowSearchResults(resultFlights);
 
-            validationResult = ValidationHelper.ValidateProperty<Flight>(tempFlight, nameof(tempFlight.DepartureStation), userInput);
-            if (validationResult.HasError)
-            {
-                Console.Write(validationResult.GetErrorMessages());
-                return;
-            }
-
-            Flight[] resultFlights = FlightDataManager.Instance.FindFlightsWithStation(userInput);
-            if (resultFlights == null || resultFlights.Length == 0)
-            {
-                Console.WriteLine("No flight record found.");
-                ScreenManager.GetInstance().PopScreen();
-            }
-            else
-            {
-                Console.WriteLine("Flight record/s found.");
-                Console.WriteLine("---------------------------------------------------");
-                foreach (Flight flight in resultFlights)
-                {
-                    Console.WriteLine(flight.ToString());
-                }
-                Console.WriteLine("---------------------------------------------------");
-
-                ScreenManager.GetInstance().PopScreen();
-            }
+            ScreenManager.GetInstance().SetActivePresenter(new SearchFlightScreen());
         }
+        
     }
 }

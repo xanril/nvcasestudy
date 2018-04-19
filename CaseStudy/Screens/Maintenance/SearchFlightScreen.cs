@@ -1,8 +1,11 @@
 ﻿using CaseStudy.Abstracts;
+using CaseStudy.DataManagers;
 using CaseStudy.Maintenance.Screens;
+using CaseStudy.Models;
 using CaseStudy.Screens;
 using CaseStudy.Views.Maintenance;
 using System;
+using System.Collections.Generic;
 
 namespace CaseStudy.Screens.Maintenance
 {
@@ -24,22 +27,19 @@ namespace CaseStudy.Screens.Maintenance
             switch (userInput)
             {
                 case MENU_SEARCH_BY_FLIGHT_NUMBER:
-                    ScreenManager.GetInstance().PushScreen(new SearchFlightNumberScreen());
+                    ScreenManager.GetInstance().SetActivePresenter(new SearchFlightNumberScreen());
                     break;
 
                 case MENU_SEARCH_BY_AIRLINE_CODE:
-                    ScreenManager.GetInstance().PushScreen(new SearchAirlineCodeScreen());
+                    ScreenManager.GetInstance().SetActivePresenter(new SearchAirlineCodeScreen());
                     break;
 
                 case MENU_SEARCH_BY_MARKET:
-                    ScreenManager.GetInstance().PushScreen(new SearchMarketScreen());
+                    ScreenManager.GetInstance().SetActivePresenter(new SearchMarketScreen());
                     break;
 
                 case MENU_BACK_TO_MENU:
-                    ScreenManager.GetInstance().PopScreen();
-                    break;
-
-                default:
+                    ScreenManager.GetInstance().SetActivePresenter(new FlightMaintenanceScreen());
                     break;
             }
         }
