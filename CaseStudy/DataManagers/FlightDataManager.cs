@@ -1,6 +1,8 @@
 ﻿using CaseStudy.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace CaseStudy.DataManagers
 {
@@ -18,7 +20,8 @@ namespace CaseStudy.DataManagers
             }
         }
 
-        private const string AIRLINE_CODE = "NV";
+        private const string TEMP_AIRLINE_CODE = "NV";
+        private const string FILENAME = "FlightData.json";
         private List<Flight> flights;
 
         private FlightDataManager()
@@ -28,41 +31,62 @@ namespace CaseStudy.DataManagers
 
         public void LoadData()
         {
-            CreateDummyFlights();
+            string filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, FILENAME);
+            FileInfo fileInfo = new FileInfo(filepath);
+            if(fileInfo.Exists == false)
+            {
+                // Create blank file
+                using (StreamWriter streamWriter = new StreamWriter(filepath, false))
+                {
+                    streamWriter.Write("");
+                }
+            }
+
+            using (StreamReader streamReader = new StreamReader(filepath))
+            {
+                string fileContents = streamReader.ReadToEnd();
+                List<Flight> resultFlights = JsonConvert.DeserializeObject<List<Flight>>(fileContents);
+
+                if (resultFlights != null)
+                    this.flights = resultFlights;
+            }
+        }
+
+        private void SaveData()
+        {
+            string filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, FILENAME);
+            using (StreamWriter sw = new StreamWriter(filepath, false))
+            {
+                using (JsonWriter writer = new JsonTextWriter(sw))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Serialize(writer, this.flights);
+                }
+            }
         }
 
         private void CreateDummyFlights()
         {
             Flight flight = new Flight();
-            flight.AirlineCode = AIRLINE_CODE;
+            flight.AirlineCode = TEMP_AIRLINE_CODE;
             flight.FlightNumber = 100;
             flight.DepartureStation = "MNL";
             flight.ArrivalStation = "MLL";
             this.flights.Add(flight);
 
             flight = new Flight();
-            flight.AirlineCode = AIRLINE_CODE;
+            flight.AirlineCode = TEMP_AIRLINE_CODE;
             flight.FlightNumber = 101;
             flight.DepartureStation = "MNL";
             flight.ArrivalStation = "MLS";
             this.flights.Add(flight);
 
             flight = new Flight();
-            flight.AirlineCode = AIRLINE_CODE;
+            flight.AirlineCode = TEMP_AIRLINE_CODE;
             flight.FlightNumber = 102;
             flight.DepartureStation = "MNL";
             flight.ArrivalStation = "MLU";
             this.flights.Add(flight);
-        }
-
-        public bool HasDuplicateFlight(Flight flight)
-        {
-            Flight dupFlight = this.flights.Find(m => m.AirlineCode == flight.AirlineCode
-                                                    && m.FlightNumber == flight.FlightNumber);
-            if (dupFlight != null)
-                return true;
-
-            return false;
         }
 
         public Flight CreateFlight()
@@ -79,6 +103,8 @@ namespace CaseStudy.DataManagers
             }
 
             this.flights.Add(flight);
+
+            SaveData();
         }
 
         public Flight FindFlight(string airlinecode, int flightNumber)
