@@ -114,7 +114,6 @@ namespace CaseStudy.Screens.Booking
 
                     if (DateTime.TryParse(userInput, out birthdate))
                     {
-                        // TODO check birthdate
                         if (ValidationHelper.IsPastDate(birthdate) == false)
                             Console.WriteLine("Birthdate should be a past date.");
                         else

@@ -22,6 +22,8 @@ namespace CaseStudy.Maintenance.Screens
         {
             userInput = userInput.ToUpper();
 
+            // TODO: Add validation for market code
+
             Flight[] resultFlights = FlightDataManager.Instance.FindFlightsWithStation(userInput);
             if (resultFlights == null || resultFlights.Length == 0)
             {

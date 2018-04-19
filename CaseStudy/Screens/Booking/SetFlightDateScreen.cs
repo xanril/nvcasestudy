@@ -30,7 +30,6 @@ namespace CaseStudy.Screens.Booking
 
             if (DateTime.TryParse(userInput, out flightDate))
             {
-                // TODO check birthdate
                 if (ValidationHelper.IsFutureDate(flightDate) == false)
                     Console.WriteLine("Flight Date should be a future date.");
                 else
