@@ -75,7 +75,7 @@ namespace CaseStudy.Models
             age = 1;
         }
 
-        public string GetInfo()
+        public override string ToString()
         {
             return this.LastName + ", " + this.FirstName + "\t" + Birthdate.ToShortDateString();
         }

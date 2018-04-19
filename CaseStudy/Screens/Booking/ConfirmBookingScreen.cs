@@ -21,7 +21,7 @@ namespace CaseStudy.Booking.Screens
         {
             Console.WriteLine("\nRESERVATIONS > BOOKING SUMMARY");
             Console.WriteLine("---------------------------------------------------");
-            Console.Write(reservation.GetInfo());
+            Console.Write(reservation.ToString());
             Console.WriteLine("---------------------------------------------------");
             Console.WriteLine("");
         }

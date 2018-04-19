@@ -34,7 +34,7 @@ namespace CaseStudy.Booking.Screens
             {
                 Console.WriteLine("Reservation record found.");
                 Console.WriteLine("---------------------------------------------------");
-                Console.Write(reservation.GetInfo());
+                Console.Write(reservation.ToString());
                 Console.WriteLine("---------------------------------------------------");
 
                 ScreenManager.GetInstance().PopScreen();

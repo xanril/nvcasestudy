@@ -37,7 +37,7 @@ namespace CaseStudy.Maintenance.Screens
                     Console.WriteLine("---------------------------------------------------");
                     foreach (Flight flight in resultFlights)
                     {
-                        Console.WriteLine(flight.GetInfo());
+                        Console.WriteLine(flight.ToString());
                     }
                     Console.WriteLine("---------------------------------------------------");
 

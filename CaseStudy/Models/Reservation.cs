@@ -33,7 +33,7 @@ namespace CaseStudy.Models
             passengers.Add(passenger);
         }
 
-        public string GetInfo()
+        public override string ToString()
         {
             StringBuilder strBuilder = new StringBuilder();
 
@@ -43,10 +43,10 @@ namespace CaseStudy.Models
             foreach (Passenger passenger in this.Passengers)
             {
                 strBuilder.Append("Passenger " + counter + ": ");
-                strBuilder.AppendLine(passenger.GetInfo());
+                strBuilder.AppendLine(passenger.ToString());
                 counter++;
             }
-            
+
             return strBuilder.ToString();
         }
     }

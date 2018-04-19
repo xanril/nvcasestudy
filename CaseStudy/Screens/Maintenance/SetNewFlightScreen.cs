@@ -144,7 +144,7 @@ namespace CaseStudy.Maintenance.Screens
                             FlightDataManager.Instance.AddFlight(flight);
                             Console.WriteLine("New Flight added.");
                             Console.WriteLine("---------------------------------------------------");
-                            Console.WriteLine(flight.GetInfo());
+                            Console.WriteLine(flight.ToString());
                             Console.WriteLine("---------------------------------------------------");
                             ScreenManager.GetInstance().PopScreen();
                         }

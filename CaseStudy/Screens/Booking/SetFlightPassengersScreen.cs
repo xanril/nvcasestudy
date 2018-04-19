@@ -111,7 +111,7 @@ namespace CaseStudy.Booking.Screens
                         {
                             passenger.Birthdate = birthdate;
                             reservation.AddPassenger(passenger);
-                            Console.WriteLine("[Passenger {0}] Added - " + passenger.GetInfo(), currentPassenger);
+                            Console.WriteLine("[Passenger {0}] Added - " + passenger.ToString(), currentPassenger);
 
                             if(reservation.Passengers.Count<Passenger>() == targetPassengerCount)
                             {

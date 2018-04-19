@@ -33,11 +33,11 @@ namespace CaseStudy.Booking.Screens
                 {
                     if (hasPassed)
                     {
-                        Console.Write("\n" + reservation.GetInfo());
+                        Console.Write("\n" + reservation.ToString());
                     }
                     else
                     {
-                        Console.Write(reservation.GetInfo());
+                        Console.Write(reservation.ToString());
                         hasPassed = true;
                     }   
                 }  

@@ -112,7 +112,7 @@ namespace CaseStudy.Models
             return ScheduledTimeDeparture.ToShortTimeString() + " - " + ScheduledTimeArrival.ToShortTimeString();
         }
 
-        public string GetInfo()
+        public override string ToString()
         {
             string infoString = GetFlightDesignator() + "\t" + GetMarket() + "   " + GetSchedule();
             return infoString;
