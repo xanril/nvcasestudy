@@ -1,9 +1,8 @@
 ﻿using CaseStudy.DataManagers;
 using CaseStudy.Models;
-using CaseStudy.Screens;
 using System;
 
-namespace CaseStudy.Maintenance.Screens
+namespace CaseStudy.Screens.Maintenance
 {
     class FlightMaintenanceScreen : IScreen
     {

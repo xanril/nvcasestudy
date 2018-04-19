@@ -1,9 +1,8 @@
 ﻿using CaseStudy.DataManagers;
 using CaseStudy.Models;
-using CaseStudy.Screens;
 using System;
 
-namespace CaseStudy.Maintenance.Screens
+namespace CaseStudy.Screens.Maintenance
 {
     class SetNewFlightScreen : IScreen
     {
@@ -82,14 +81,13 @@ namespace CaseStudy.Maintenance.Screens
                     }
 
                     // check for duplicate flight
-                    // TODO: Check for flight conflict?
-                    //Flight duplicateFlight = DataManager.GetInstance().FindFlight(flight.AirlineCode, intUserInput);
-                    //if (duplicateFlight != null)
-                    //{
-                    //    Console.WriteLine("Flight already exists. Please try again.");
-                    //    ScreenManager.GetInstance().PopScreen();
-                    //    break;
-                    //}
+                    Flight duplicateFlight = FlightDataManager.Instance.FindFlight(flight.AirlineCode, intUserInput);
+                    if (duplicateFlight != null)
+                    {
+                        Console.WriteLine("Flight already exists. Please try again.");
+                        ScreenManager.GetInstance().PopScreen();
+                        break;
+                    }
 
                     try
                     {
@@ -105,12 +103,12 @@ namespace CaseStudy.Maintenance.Screens
                 case CreateFlightStates.StateGetDepartureStation:
 
                     // check for same flight with same departure station
-                    Flight sameFlight = FlightDataManager.Instance.FindFlight(flight.AirlineCode, flight.FlightNumber);
-                    if(sameFlight != null && sameFlight.DepartureStation.Equals(userInput))
-                    {
-                        Console.WriteLine("Flight with same departure station already exists.");
-                        break;
-                    }
+                    //Flight sameFlight = FlightDataManager.Instance.FindFlight(flight.AirlineCode, flight.FlightNumber);
+                    //if(sameFlight != null && sameFlight.DepartureStation.Equals(userInput))
+                    //{
+                    //    Console.WriteLine("Flight with same departure station already exists.");
+                    //    break;
+                    //}
 
                     try
                     {
@@ -128,7 +126,7 @@ namespace CaseStudy.Maintenance.Screens
                     try
                     {
                         flight.ArrivalStation = userInput;
-                        currState = CreateFlightStates.StateSaveFlight;
+                        ScreenManager.GetInstance().PushScreen(new ConfirmNewFlightScreen(flight));
                     }
                     catch (Exception ex)
                     {
@@ -136,24 +134,6 @@ namespace CaseStudy.Maintenance.Screens
                         break;
                     }
 
-                    // TODO: Move this somewhere else? confirmation screen?
-                    if(currState == CreateFlightStates.StateSaveFlight)
-                    {
-                        try
-                        {
-                            FlightDataManager.Instance.AddFlight(flight);
-                            Console.WriteLine("New Flight added.");
-                            Console.WriteLine("---------------------------------------------------");
-                            Console.WriteLine(flight.ToString());
-                            Console.WriteLine("---------------------------------------------------");
-                            ScreenManager.GetInstance().PopScreen();
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.Write(ex.Message + " Please try again.");
-                            ScreenManager.GetInstance().PopScreen();
-                        }
-                    }
                     break;
             }
         }

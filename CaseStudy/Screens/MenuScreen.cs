@@ -1,5 +1,5 @@
 ﻿using CaseStudy.Booking.Screens;
-using CaseStudy.Maintenance.Screens;
+using CaseStudy.Screens.Maintenance;
 using System;
 
 namespace CaseStudy.Screens
