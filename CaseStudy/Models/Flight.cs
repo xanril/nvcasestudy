@@ -18,14 +18,14 @@ namespace CaseStudy.Models
         [Range(minimum:1, maximum:9999, ErrorMessage = "Flight Number should be between the range of 1 to 9999.")]
         public int FlightNumber { get; set; }
 
-        [Required(ErrorMessage = "Arrival Station should have a value.")]
-        [StringLength(3, MinimumLength = 3, ErrorMessage ="Arrival Station should have 3-character length.")]
-        [RegularExpression("([a-zA-Z])+", ErrorMessage = "Arrival Station should only be composed of letters.")]
+        [Required(ErrorMessage = "Station Code should have a value.")]
+        [StringLength(3, MinimumLength = 3, ErrorMessage = "Station Code should have 3-character length.")]
+        [RegularExpression("([a-zA-Z])+", ErrorMessage = "Station Code should only be composed of letters.")]
         public string ArrivalStation { get; set; }
 
-        [Required(ErrorMessage = "Departure Station should have a value.")]
-        [StringLength(3, MinimumLength = 3, ErrorMessage = "Departure Station should have 3-character length.")]
-        [RegularExpression("([a-zA-Z])+", ErrorMessage = "Departure Station should only be composed of letters.")]
+        [Required(ErrorMessage = "Station Code should have a value.")]
+        [StringLength(3, MinimumLength = 3, ErrorMessage = "Station Code should have 3-character length.")]
+        [RegularExpression("([a-zA-Z])+", ErrorMessage = "Station Code should only be composed of letters.")]
         public string  DepartureStation { get; set; }
 
         // Required

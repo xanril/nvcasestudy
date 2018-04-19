@@ -1,4 +1,5 @@
 ﻿using CaseStudy.DataManagers;
+using CaseStudy.Helpers;
 using CaseStudy.Models;
 using CaseStudy.Screens;
 using System;
@@ -8,6 +9,13 @@ namespace CaseStudy.Maintenance.Screens
 {
     class SearchMarketScreen : IScreen
     {
+        private Flight tempFlight;
+
+        public SearchMarketScreen()
+        {
+            this.tempFlight = FlightDataManager.Instance.CreateFlight();
+        }
+
         public void Display()
         {
             Console.WriteLine("\nFLIGHT MAINTENANCE > SEARCH FLIGHT > BY ORIGIN / DESTINATION");
@@ -21,8 +29,14 @@ namespace CaseStudy.Maintenance.Screens
         public void ProcessInput(string userInput)
         {
             userInput = userInput.ToUpper();
+            ValidationHelperResult validationResult = null;
 
-            // TODO: Add validation for market code
+            validationResult = ValidationHelper.ValidateProperty<Flight>(tempFlight, nameof(tempFlight.DepartureStation), userInput);
+            if (validationResult.HasError)
+            {
+                Console.Write(validationResult.GetErrorMessages());
+                return;
+            }
 
             Flight[] resultFlights = FlightDataManager.Instance.FindFlightsWithStation(userInput);
             if (resultFlights == null || resultFlights.Length == 0)

@@ -1,4 +1,5 @@
 ﻿using CaseStudy.DataManagers;
+using CaseStudy.Helpers;
 using CaseStudy.Models;
 using CaseStudy.Screens;
 using System;
@@ -8,6 +9,14 @@ namespace CaseStudy.Maintenance.Screens
 {
     class SearchAirlineCodeScreen : IScreen
     {
+        // only used for validation
+        private Flight tempFlight;
+
+        public SearchAirlineCodeScreen()
+        {
+            tempFlight = FlightDataManager.Instance.CreateFlight();
+        }
+
         public void Display()
         {
             Console.WriteLine("\nFLIGHT MAINTENANCE > SEARCH FLIGHT > BY AIRLINE CODE");
@@ -21,7 +30,15 @@ namespace CaseStudy.Maintenance.Screens
         public void ProcessInput(string userInput)
         {
             userInput = userInput.ToUpper();
-            // TODO: Add validation for airline code?
+            
+            ValidationHelperResult validationResult = null;
+
+            validationResult = ValidationHelper.ValidateProperty<Flight>(tempFlight, nameof(tempFlight.AirlineCode), userInput);
+            if(validationResult.HasError)
+            {
+                Console.Write(validationResult.GetErrorMessages());
+                return;
+            }
 
             Flight[] resultFlights = FlightDataManager.Instance.FindFlightsByAirlineCode(userInput);
             if (resultFlights == null || resultFlights.Length == 0)
