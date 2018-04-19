@@ -1,7 +1,9 @@
 ﻿using CaseStudy.Helpers;
 using CaseStudy.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace CaseStudy.DataManagers
 {
@@ -19,6 +21,7 @@ namespace CaseStudy.DataManagers
             }
         }
 
+        private const string FILENAME = "ReservationData.json";
         private List<Reservation> reservations;
 
         private ReservationDataManager()
@@ -28,7 +31,38 @@ namespace CaseStudy.DataManagers
 
         public void LoadData()
         {
-            CreateDummyReservations();
+            string filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, FILENAME);
+            FileInfo fileInfo = new FileInfo(filepath);
+            if (fileInfo.Exists == false)
+            {
+                // Create blank file
+                using (StreamWriter streamWriter = new StreamWriter(filepath, false))
+                {
+                    streamWriter.Write("");
+                }
+            }
+
+            using (StreamReader streamReader = new StreamReader(filepath))
+            {
+                string fileContents = streamReader.ReadToEnd();
+                List<Reservation> resultReservations = JsonConvert.DeserializeObject<List<Reservation>>(fileContents);
+
+                if (resultReservations != null)
+                    this.reservations = resultReservations;
+            }
+        }
+
+        private void SaveData()
+        {
+            string filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, FILENAME);
+            using (StreamWriter sw = new StreamWriter(filepath, false))
+            {
+                using (JsonWriter writer = new JsonTextWriter(sw))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Serialize(writer, this.reservations);
+                }
+            }
         }
 
         private void CreateDummyReservations()
@@ -90,7 +124,8 @@ namespace CaseStudy.DataManagers
                 throw new ArgumentException(nameof(reservation));
 
             this.reservations.Add(reservation);
-            //TODO: Save Reservations to text file.
+
+            SaveData();
         }
     }
 }
