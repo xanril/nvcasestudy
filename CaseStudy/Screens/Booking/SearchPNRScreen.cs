@@ -1,4 +1,5 @@
 ﻿using CaseStudy.DataManagers;
+using CaseStudy.Helpers;
 using CaseStudy.Models;
 using CaseStudy.Screens;
 using System;
@@ -8,6 +9,12 @@ namespace CaseStudy.Screens.Booking
     class SearchPNRScreen : IScreen
     {
         private const string KEY_BACK_TO_MENU = "X";
+        private Reservation tempReservation;
+
+        public SearchPNRScreen()
+        {
+            tempReservation = ReservationDataManager.Instance.CreateReservation();
+        }
 
         public void Display()
         {
@@ -23,6 +30,20 @@ namespace CaseStudy.Screens.Booking
         {
             userInput = userInput.Trim();
             userInput = userInput.ToUpper();
+  
+            if (ValidationHelper.IsFirstCharacterLetter(userInput) == false)
+            {
+                Console.WriteLine("First character should always be a letter.");
+                return;
+            }
+
+            ValidationHelperResult validationResult = null;
+            validationResult = ValidationHelper.ValidateProperty<Reservation>(tempReservation, nameof(tempReservation.PNR), userInput);
+            if(validationResult.HasError)
+            {
+                Console.Write(validationResult.GetErrorMessages());
+                return;
+            }
 
             Reservation reservation = ReservationDataManager.Instance.FindReservation(userInput);
             

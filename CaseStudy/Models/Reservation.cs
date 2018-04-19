@@ -17,6 +17,8 @@ namespace CaseStudy.Models
             get { return passengers; }
         }
 
+        [StringLength(6, ErrorMessage = "PNR should have maximum of 6 characters only.")]
+        [RegularExpression("([A-Z0-9])+", ErrorMessage = "PNR should only be composed of letters and numbers")]
         public string PNR { get; set; }
 
         public Reservation(string generatedPNR)

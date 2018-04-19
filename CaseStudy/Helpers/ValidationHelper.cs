@@ -33,6 +33,18 @@ namespace CaseStudy.Helpers
 
             return true;
         }
+
+        public static bool IsFirstCharacterLetter(string textToCheck)
+        {
+            if (string.IsNullOrEmpty(textToCheck))
+                return false;
+
+            string charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            if (charset.Contains(textToCheck.Substring(0, 1)))
+                return true;
+
+            return false;
+        }
     }
 
     public class ValidationHelperResult
