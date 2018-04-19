@@ -55,16 +55,6 @@ namespace CaseStudy.DataManagers
             this.flights.Add(flight);
         }
 
-        public bool HasDuplicateFlight(Flight flight)
-        {
-            Flight dupFlight = this.flights.Find(m => m.AirlineCode == flight.AirlineCode
-                                                    && m.FlightNumber == flight.FlightNumber);
-            if (dupFlight != null)
-                return true;
-
-            return false;
-        }
-
         public Flight CreateFlight()
         {
             Flight newFlight = new Flight();
