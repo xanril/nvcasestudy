@@ -23,8 +23,7 @@ namespace CaseStudy.Screens.Maintenance
             switch (userInput)
             {
                 case MENU_ADD_FLIGHT:
-                    //Flight newFlight = FlightDataManager.Instance.CreateFlight();
-                    //ScreenManager.GetInstance().PushScreen(new SetNewFlightScreen(newFlight));
+                    ScreenManager.GetInstance().SetActivePresenter(new CreateNewFlightScreen());
                     break;
 
                 case MENU_SEARCH_FLIGHT:

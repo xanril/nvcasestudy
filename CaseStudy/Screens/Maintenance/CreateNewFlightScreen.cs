@@ -1,11 +1,13 @@
-﻿using CaseStudy.DataManagers;
+﻿using CaseStudy.Abstracts;
+using CaseStudy.DataManagers;
 using CaseStudy.Helpers;
 using CaseStudy.Models;
+using CaseStudy.Views.Maintenance;
 using System;
 
 namespace CaseStudy.Screens.Maintenance
 {
-    class CreateNewFlightScreen : IScreen
+    class CreateNewFlightScreen : AbstractPresenter
     {
         private enum CreateFlightStates
         {
@@ -19,10 +21,13 @@ namespace CaseStudy.Screens.Maintenance
         private Flight flight;
         private CreateFlightStates currState;
 
-        public CreateNewFlightScreen(Flight flight)
+        public CreateNewFlightScreen()
         {
-            this.flight = flight;
-            currState = CreateFlightStates.StateGetAirlineCode;
+            this.flight = FlightDataManager.Instance.CreateFlight();
+            this.view = new CreateNewFlightView(this);
+            ScreenManager.GetInstance().SetActiveView(this.view);
+
+            ChangeState(CreateFlightStates.StateGetAirlineCode);
         }
 
         public void Display()
@@ -30,24 +35,25 @@ namespace CaseStudy.Screens.Maintenance
             Console.WriteLine("\nFLIGHT MAINTENANCE > ADD FLIGHT");
         }
 
-        public void ShowInputPrompt()
+        private void ChangeState(CreateFlightStates newState)
         {
+            currState = newState;
             switch(currState)
             {
                 case CreateFlightStates.StateGetAirlineCode:
-                    Console.Write("Airline Code: ");
+                    this.view.SetInputPrompt("Airline Code: ");
                     break;
 
                 case CreateFlightStates.StateGetFlightNumber:
-                    Console.Write("Flight Number: ");
+                    this.view.SetInputPrompt("Flight Number: ");
                     break;
 
                 case CreateFlightStates.StateGetDepartureStation:
-                    Console.Write("Departure Station: ");
+                    this.view.SetInputPrompt("Departure Station: ");
                     break;
 
                 case CreateFlightStates.StateGetArrivalStation:
-                    Console.Write("Arrival Station: ");
+                    this.view.SetInputPrompt("Arrival Station: ");
                     break;
             }
         }
@@ -65,11 +71,11 @@ namespace CaseStudy.Screens.Maintenance
 
                     validationResult = ValidationHelper.ValidateProperty<Flight>(flight, nameof(flight.AirlineCode), userInput);
                     if (validationResult.HasError)
-                        Console.Write(validationResult.GetErrorMessages());
+                        this.view.SetErrorMessage(validationResult.GetErrorMessages());
                     else
                     {
                         flight.AirlineCode = userInput;
-                        currState = CreateFlightStates.StateGetFlightNumber;
+                        ChangeState(CreateFlightStates.StateGetFlightNumber);
                     }
                     break;
 
@@ -79,7 +85,7 @@ namespace CaseStudy.Screens.Maintenance
                     int intUserInput = -1;
                     if(int.TryParse(userInput, out intUserInput) == false)
                     {
-                        Console.WriteLine("Flight Number should only contain numerical characters.");
+                        this.view.SetErrorMessage("Flight Number should only contain numerical characters.");
                         break;
                     }
 
@@ -87,7 +93,7 @@ namespace CaseStudy.Screens.Maintenance
                     Flight duplicateFlight = FlightDataManager.Instance.FindFlight(flight.AirlineCode, intUserInput);
                     if (duplicateFlight != null)
                     {
-                        Console.WriteLine("Flight already exists. Please try again.");
+                        this.view.SetErrorMessage("Flight already exists. Please try again.");
                         ScreenManager.GetInstance().PopScreen();
                         break;
                     }
@@ -98,28 +104,20 @@ namespace CaseStudy.Screens.Maintenance
                     else
                     {
                         flight.FlightNumber = intUserInput;
-                        currState = CreateFlightStates.StateGetDepartureStation;
+                        ChangeState(CreateFlightStates.StateGetDepartureStation);
                     }
                    
                     break;
 
                 case CreateFlightStates.StateGetDepartureStation:
 
-                    // check for same flight with same departure station
-                    //Flight sameFlight = FlightDataManager.Instance.FindFlight(flight.AirlineCode, flight.FlightNumber);
-                    //if(sameFlight != null && sameFlight.DepartureStation.Equals(userInput))
-                    //{
-                    //    Console.WriteLine("Flight with same departure station already exists.");
-                    //    break;
-                    //}
-
                     validationResult = ValidationHelper.ValidateProperty<Flight>(flight, nameof(flight.DepartureStation), userInput);
                     if (validationResult.HasError)
-                        Console.Write(validationResult.GetErrorMessages());
+                        this.view.SetErrorMessage(validationResult.GetErrorMessages());
                     else
                     {
                         flight.DepartureStation = userInput;
-                        currState = CreateFlightStates.StateGetArrivalStation;
+                        ChangeState(CreateFlightStates.StateGetArrivalStation);
                     }
                     
                     break;
@@ -128,11 +126,11 @@ namespace CaseStudy.Screens.Maintenance
 
                     validationResult = ValidationHelper.ValidateProperty<Flight>(flight, nameof(flight.ArrivalStation), userInput);
                     if (validationResult.HasError)
-                        Console.Write(validationResult.GetErrorMessages());
+                        this.view.SetErrorMessage(validationResult.GetErrorMessages());
                     else
                     {
                         flight.ArrivalStation = userInput;
-                        ScreenManager.GetInstance().PushScreen(new ConfirmNewFlightScreen(flight));
+                        ScreenManager.GetInstance().SetActivePresenter(new ConfirmNewFlightScreen(flight));
                     }
 
                     break;

@@ -75,6 +75,8 @@
     <Compile Include="Screens\Maintenance\SearchMarketScreen.cs" />
     <Compile Include="Screens\Booking\SetFlightPassengersScreen.cs" />
     <Compile Include="Views\MainMenuView.cs" />
+    <Compile Include="Views\Maintenance\ConfirmNewFlightView.cs" />
+    <Compile Include="Views\Maintenance\CreateNewFlightView.cs" />
     <Compile Include="Views\Maintenance\FlightMaintenanceView.cs" />
     <Compile Include="Views\Maintenance\SearchAirlineCodeView.cs" />
     <Compile Include="Views\Maintenance\SearchFlightNumberView.cs" />

@@ -9,6 +9,7 @@ namespace CaseStudy.Abstracts
     abstract public class AbstractView
     {
         private string errorMessage;
+        private string inputPrompt;
 
         abstract public void Display();
         public abstract void ReadInput(string userInput);
@@ -22,11 +23,19 @@ namespace CaseStudy.Abstracts
             errorMessage = string.Empty;
         }
 
-        abstract public void ShowInputPrompt();
+        public virtual void ShowInputPrompt()
+        {
+            Console.Write(this.inputPrompt);
+        }
 
         public void SetErrorMessage(string errorMessage)
         {
             this.errorMessage = errorMessage;
+        }
+
+        public void SetInputPrompt(string message)
+        {
+            this.inputPrompt = message;
         }
 
         public void ShowInputFeedback(string feedbackMessage)
