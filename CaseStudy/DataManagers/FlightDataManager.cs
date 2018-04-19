@@ -20,8 +20,7 @@ namespace CaseStudy.DataManagers
             }
         }
 
-        private const string AIRLINE_CODE = "NV";
-        private const string FILE_SAVE_PATH = "C:\\Users\\kmitra\\Documents";
+        private const string TEMP_AIRLINE_CODE = "NV";
         private const string FILENAME = "FlightData.json";
         private List<Flight> flights;
 
@@ -32,16 +31,31 @@ namespace CaseStudy.DataManagers
 
         public void LoadData()
         {
-            using (StreamReader streamReader = new StreamReader(Path.Combine(FILE_SAVE_PATH, FILENAME)))
+            string filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, FILENAME);
+            FileInfo fileInfo = new FileInfo(filepath);
+            if(fileInfo.Exists == false)
+            {
+                // Create blank file
+                using (StreamWriter streamWriter = new StreamWriter(filepath, false))
+                {
+                    streamWriter.Write("");
+                }
+            }
+
+            using (StreamReader streamReader = new StreamReader(filepath))
             {
                 string fileContents = streamReader.ReadToEnd();
-                this.flights = JsonConvert.DeserializeObject<List<Flight>>(fileContents);
+                List<Flight> resultFlights = JsonConvert.DeserializeObject<List<Flight>>(fileContents);
+
+                if (resultFlights != null)
+                    this.flights = resultFlights;
             }
         }
 
         private void SaveData()
         {
-            using (StreamWriter sw = new StreamWriter(Path.Combine(FILE_SAVE_PATH, FILENAME), false))
+            string filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, FILENAME);
+            using (StreamWriter sw = new StreamWriter(filepath, false))
             {
                 using (JsonWriter writer = new JsonTextWriter(sw))
                 {
@@ -54,21 +68,21 @@ namespace CaseStudy.DataManagers
         private void CreateDummyFlights()
         {
             Flight flight = new Flight();
-            flight.AirlineCode = AIRLINE_CODE;
+            flight.AirlineCode = TEMP_AIRLINE_CODE;
             flight.FlightNumber = 100;
             flight.DepartureStation = "MNL";
             flight.ArrivalStation = "MLL";
             this.flights.Add(flight);
 
             flight = new Flight();
-            flight.AirlineCode = AIRLINE_CODE;
+            flight.AirlineCode = TEMP_AIRLINE_CODE;
             flight.FlightNumber = 101;
             flight.DepartureStation = "MNL";
             flight.ArrivalStation = "MLS";
             this.flights.Add(flight);
 
             flight = new Flight();
-            flight.AirlineCode = AIRLINE_CODE;
+            flight.AirlineCode = TEMP_AIRLINE_CODE;
             flight.FlightNumber = 102;
             flight.DepartureStation = "MNL";
             flight.ArrivalStation = "MLU";
