@@ -1,4 +1,5 @@
-﻿using CaseStudy.Models;
+﻿using CaseStudy.Helpers;
+using CaseStudy.Models;
 using CaseStudy.Screens;
 using System;
 using System.Linq;
@@ -59,45 +60,52 @@ namespace CaseStudy.Booking.Screens
 
         public void ProcessInput(string userInput)
         {
-            switch(currState)
+            ValidationHelperResult validationResult = null;
+
+            switch (currState)
             {
                 case SetPassengerStates.StateMaxCount:
 
                     int passengerCount = 0;
                     if(int.TryParse(userInput, out passengerCount))
                     {
-                        this.targetPassengerCount = passengerCount;
-                        currState = SetPassengerStates.StateFirstName;
+                        if(passengerCount > 5)
+                            Console.WriteLine("Passenger count should not be more than 5");
+                        else
+                        {
+                            this.targetPassengerCount = passengerCount;
+                            currState = SetPassengerStates.StateFirstName;
+                        }
                     }
                     else
                     {
                         Console.WriteLine("Passenger count should be numeric");
                     }
-                   break;
+                    break;
 
                 case SetPassengerStates.StateFirstName:
 
-                    try
-                    {
+                    validationResult = ValidationHelper.ValidateProperty<Passenger>(passenger, nameof(passenger.FirstName), userInput);
+                    if (validationResult.HasError)
+                        Console.Write(validationResult.GetErrorMessages());
+                    else
+                    { 
                         passenger.FirstName = userInput;
                         currState = SetPassengerStates.StateLastName;
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
                     }
                     break;
 
                 case SetPassengerStates.StateLastName:
-                    try
-                    {
+
+                    validationResult = ValidationHelper.ValidateProperty<Passenger>(passenger, nameof(passenger.LastName), userInput);
+                    if (validationResult.HasError)
+                        Console.Write(validationResult.GetErrorMessages());
+                    else
+                    { 
                         passenger.LastName = userInput;
                         currState = SetPassengerStates.StateBirthday;
                     }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
+                    
                     break;
 
                 case SetPassengerStates.StateBirthday:
@@ -107,13 +115,16 @@ namespace CaseStudy.Booking.Screens
 
                     if (DateTime.TryParse(userInput, out birthdate))
                     {
-                        try
+                        // TODO check birthdate
+                        if (ValidationHelper.IsPastDate(birthdate) == false)
+                            Console.WriteLine("Birthdate should be a past date.");
+                        else
                         {
                             passenger.Birthdate = birthdate;
                             reservation.AddPassenger(passenger);
                             Console.WriteLine("[Passenger {0}] Added - " + passenger.ToString(), currentPassenger);
 
-                            if(reservation.Passengers.Count<Passenger>() == targetPassengerCount)
+                            if (reservation.Passengers.Count<Passenger>() == targetPassengerCount)
                             {
                                 ScreenManager.GetInstance().PushScreen(new ConfirmBookingScreen(reservation));
                             }
@@ -123,10 +134,6 @@ namespace CaseStudy.Booking.Screens
                                 currState = SetPassengerStates.StateFirstName;
                                 currentPassenger = currentPassenger + 1;
                             }
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.Message);
                         }
                     }
                     else

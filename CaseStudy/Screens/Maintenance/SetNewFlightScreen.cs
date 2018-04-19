@@ -1,4 +1,5 @@
 ﻿using CaseStudy.DataManagers;
+using CaseStudy.Helpers;
 using CaseStudy.Models;
 using System;
 
@@ -56,17 +57,19 @@ namespace CaseStudy.Screens.Maintenance
             userInput = userInput.ToUpper();
             userInput = userInput.Trim();
 
-            switch(currState)
+            ValidationHelperResult validationResult = null;
+
+            switch (currState)
             {
                 case CreateFlightStates.StateGetAirlineCode:
-                    try
+
+                    validationResult = ValidationHelper.ValidateProperty<Flight>(flight, nameof(flight.AirlineCode), userInput);
+                    if (validationResult.HasError)
+                        Console.Write(validationResult.GetErrorMessages());
+                    else
                     {
                         flight.AirlineCode = userInput;
                         currState = CreateFlightStates.StateGetFlightNumber;
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.Write(ex.Message);
                     }
                     break;
 
@@ -89,15 +92,15 @@ namespace CaseStudy.Screens.Maintenance
                         break;
                     }
 
-                    try
+                    validationResult = ValidationHelper.ValidateProperty<Flight>(flight, nameof(flight.FlightNumber), intUserInput);
+                    if (validationResult.HasError)
+                        Console.Write(validationResult.GetErrorMessages());
+                    else
                     {
                         flight.FlightNumber = intUserInput;
                         currState = CreateFlightStates.StateGetDepartureStation;
                     }
-                    catch (Exception ex)
-                    {
-                        Console.Write(ex.Message);
-                    }
+                   
                     break;
 
                 case CreateFlightStates.StateGetDepartureStation:
@@ -110,28 +113,26 @@ namespace CaseStudy.Screens.Maintenance
                     //    break;
                     //}
 
-                    try
+                    validationResult = ValidationHelper.ValidateProperty<Flight>(flight, nameof(flight.DepartureStation), userInput);
+                    if (validationResult.HasError)
+                        Console.Write(validationResult.GetErrorMessages());
+                    else
                     {
                         flight.DepartureStation = userInput;
                         currState = CreateFlightStates.StateGetArrivalStation;
                     }
-                    catch (Exception ex)
-                    {
-                        Console.Write(ex.Message);
-                    }
+                    
                     break;
 
                 case CreateFlightStates.StateGetArrivalStation:
 
-                    try
+                    validationResult = ValidationHelper.ValidateProperty<Flight>(flight, nameof(flight.ArrivalStation), userInput);
+                    if (validationResult.HasError)
+                        Console.Write(validationResult.GetErrorMessages());
+                    else
                     {
                         flight.ArrivalStation = userInput;
                         ScreenManager.GetInstance().PushScreen(new ConfirmNewFlightScreen(flight));
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.Write(ex.Message);
-                        break;
                     }
 
                     break;

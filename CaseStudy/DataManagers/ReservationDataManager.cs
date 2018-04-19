@@ -68,11 +68,11 @@ namespace CaseStudy.DataManagers
         private void CreateDummyReservations()
         {
             Reservation reservation = CreateReservation();
-            reservation.flight = new Flight();
-            reservation.flight.AirlineCode = "NV";
-            reservation.flight.FlightNumber = 100;
-            reservation.flight.ArrivalStation = "MNL";
-            reservation.flight.DepartureStation = "MLL";
+            reservation.TargetFlight = new Flight();
+            reservation.TargetFlight.AirlineCode = "NV";
+            reservation.TargetFlight.FlightNumber = 100;
+            reservation.TargetFlight.ArrivalStation = "MNL";
+            reservation.TargetFlight.DepartureStation = "MLL";
             Passenger passenger = new Passenger();
             passenger.FirstName = "Tony";
             passenger.LastName = "Stark";
@@ -84,11 +84,11 @@ namespace CaseStudy.DataManagers
             reservations.Add(reservation);
 
             reservation = CreateReservation();
-            reservation.flight = new Flight();
-            reservation.flight.AirlineCode = "NV";
-            reservation.flight.FlightNumber = 101;
-            reservation.flight.ArrivalStation = "MNL";
-            reservation.flight.DepartureStation = "MLS";
+            reservation.TargetFlight = new Flight();
+            reservation.TargetFlight.AirlineCode = "NV";
+            reservation.TargetFlight.FlightNumber = 101;
+            reservation.TargetFlight.ArrivalStation = "MNL";
+            reservation.TargetFlight.DepartureStation = "MLS";
             passenger = new Passenger();
             passenger.FirstName = "Steve";
             passenger.LastName = "Rogers";

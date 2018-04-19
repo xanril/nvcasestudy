@@ -8,7 +8,7 @@ namespace CaseStudy.Models
 {
     public class Reservation
     {
-        public Flight flight;
+        public Flight TargetFlight { get; set; }
 
         // Max 5 per booking
         private List<Passenger> passengers;
@@ -17,10 +17,7 @@ namespace CaseStudy.Models
             get { return passengers; }
         }
 
-        public string PNR
-        {
-            get; set;
-        }
+        public string PNR { get; set; }
 
         public Reservation(string generatedPNR)
         {
@@ -38,7 +35,7 @@ namespace CaseStudy.Models
             StringBuilder strBuilder = new StringBuilder();
 
             strBuilder.AppendLine("PNR: " + this.PNR);
-            strBuilder.AppendLine("Flight: " + flight.GetFlightDesignator());
+            strBuilder.AppendLine("Flight: " + TargetFlight.GetFlightDesignator());
             int counter = 1;
             foreach (Passenger passenger in this.Passengers)
             {

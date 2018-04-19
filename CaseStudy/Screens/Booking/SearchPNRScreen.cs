@@ -29,6 +29,7 @@ namespace CaseStudy.Booking.Screens
             if(reservation == null)
             {
                 Console.WriteLine("No Reservation record exists for PNR {0}.", userInput);
+                ScreenManager.GetInstance().PopScreen();
             }
             else
             {
