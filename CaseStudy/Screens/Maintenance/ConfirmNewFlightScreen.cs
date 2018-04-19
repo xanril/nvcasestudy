@@ -19,7 +19,6 @@ namespace CaseStudy.Screens.Maintenance
         public void Display()
         {
             Console.WriteLine("\nFLIGHT MAINTENANCE > NEW FLIGHT SUMMARY");
-            Console.WriteLine("New Flight added.");
             Console.WriteLine("---------------------------------------------------");
             Console.WriteLine(flight.ToString());
             Console.WriteLine("---------------------------------------------------");
