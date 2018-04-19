@@ -1,10 +1,9 @@
 ﻿using CaseStudy.Helpers;
 using CaseStudy.Models;
-using CaseStudy.Screens;
 using System;
 using System.Linq;
 
-namespace CaseStudy.Booking.Screens
+namespace CaseStudy.Screens.Booking
 {
     class SetFlightPassengersScreen : IScreen
     {

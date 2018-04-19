@@ -3,7 +3,7 @@ using CaseStudy.Models;
 using CaseStudy.Screens;
 using System;
 
-namespace CaseStudy.Booking.Screens
+namespace CaseStudy.Screens.Booking
 {
     class SearchPNRScreen : IScreen
     {

@@ -1,4 +1,4 @@
-﻿using CaseStudy.Booking.Screens;
+﻿using CaseStudy.Screens.Booking;
 using CaseStudy.Screens.Maintenance;
 using System;
 

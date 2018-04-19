@@ -25,6 +25,8 @@ namespace CaseStudy.Models
             this.PNR = generatedPNR;
         }
 
+        public DateTime FlightDate { get; set; }
+
         public void AddPassenger(Passenger passenger)
         {
             passengers.Add(passenger);
@@ -36,6 +38,7 @@ namespace CaseStudy.Models
 
             strBuilder.AppendLine("PNR: " + this.PNR);
             strBuilder.AppendLine("Flight: " + TargetFlight.GetFlightDesignator());
+            strBuilder.AppendLine("Date: " + FlightDate.ToShortDateString());
             int counter = 1;
             foreach (Passenger passenger in this.Passengers)
             {

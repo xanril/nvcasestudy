@@ -3,7 +3,7 @@ using CaseStudy.Models;
 using CaseStudy.Screens;
 using System;
 
-namespace CaseStudy.Booking.Screens
+namespace CaseStudy.Screens.Booking
 {
     class SelectFlightScreen : IScreen
     {
@@ -52,10 +52,9 @@ namespace CaseStudy.Booking.Screens
                     Console.WriteLine("---------------------------------------------------");
                     Console.WriteLine(flight.ToString());
                     Console.WriteLine("---------------------------------------------------");
-                    Console.WriteLine("");
 
                     reservation.TargetFlight = flight;
-                    ScreenManager.GetInstance().PushScreen(new SetFlightPassengersScreen(reservation));
+                    ScreenManager.GetInstance().PushScreen(new SetFlightDateScreen(reservation));
                 }
                 else
                 {
