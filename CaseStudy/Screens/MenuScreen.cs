@@ -12,7 +12,7 @@ namespace CaseStudy.Screens
 
         public void Display()
         {
-            Console.WriteLine("MAIN MENU:");
+            Console.WriteLine("\nMAIN MENU:");
             Console.WriteLine("[" + MENU_FLIGHT_MAINTENANCE + "] Go to Flight Maintenance Screen");
             Console.WriteLine("[" + MENU_RESERVATION + "] Go to Reservation Screen");
             Console.WriteLine("[" + MENU_EXIT + "] Exit");
