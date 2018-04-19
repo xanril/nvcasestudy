@@ -19,7 +19,7 @@ namespace CaseStudy.Models
 
         public string PNR
         {
-            get; private set;
+            get; set;
         }
 
         public Reservation(string generatedPNR)
