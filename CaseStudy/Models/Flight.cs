@@ -42,10 +42,22 @@ namespace CaseStudy.Models
             }
         }
 
+        private string arrivalStation;
         [Required(ErrorMessage = "Arrival Station should have a value.")]
         [StringLength(3, MinimumLength = 3, ErrorMessage ="Arrival Station should have 3-character length.")]
         [RegularExpression("([a-zA-Z])+", ErrorMessage = "Arrival Station should only be composed of letters.")]
-        public string ArrivalStation { get; set; }
+        public string ArrivalStation
+        {
+            get { return arrivalStation; }
+            set
+            {
+                ValidationHelperResult validationResult = ValidationHelper.ValidateProperty<Flight>(this, nameof(ArrivalStation), value);
+                if (validationResult.IsValid)
+                    throw new Exception(validationResult.GetErrorMessages());
+
+                arrivalStation = value;
+            }
+        }
 
         private string departureStation;
         [Required(ErrorMessage = "Departure Station should have a value.")]

@@ -133,6 +133,7 @@ namespace CaseStudy.Maintenance.Screens
                     catch (Exception ex)
                     {
                         Console.Write(ex.Message);
+                        break;
                     }
 
                     // TODO: Move this somewhere else? confirmation screen?
