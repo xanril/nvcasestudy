@@ -1,60 +1,26 @@
-﻿using CaseStudy.Models;
+﻿using CaseStudy.Abstracts;
+using CaseStudy.DataManagers;
+using CaseStudy.Models;
 using CaseStudy.Screens;
+using CaseStudy.Views.Booking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace CaseStudy.Screens.Booking
 {
-    class ListReservationsScreen : IScreen
+    class ListReservationsScreen : AbstractPresenter
     {
-        private IEnumerable<Reservation> reservations;
-
-        public ListReservationsScreen(IEnumerable<Reservation> reservations)
+        public ListReservationsScreen()
         {
-            this.reservations = reservations;
+            IEnumerable<Reservation> reservations = ReservationDataManager.Instance.GetReservations();
+            this.view = new ListReservationsView(this, reservations);
+            ScreenManager.GetInstance().SetActiveView(this.view);
         }
-
-        public void Display()
-        {
-            Console.WriteLine("\nRESERVATIONS > LIST RESERVATIONS");
-            Console.WriteLine("");
-
-            if (this.reservations.Count<Reservation>() == 0)
-            {
-                Console.WriteLine("No Reservation records found.");
-            }
-            else
-            {
-                Console.WriteLine("Reservation record/s found.");
-                Console.WriteLine("---------------------------------------------------");
-                bool hasPassed = false;
-                foreach (Reservation reservation in reservations)
-                {
-                    if (hasPassed)
-                    {
-                        Console.Write("\n" + reservation.ToString());
-                    }
-                    else
-                    {
-                        Console.Write(reservation.ToString());
-                        hasPassed = true;
-                    }   
-                }  
-                Console.WriteLine("---------------------------------------------------");
-            }
-
-            Console.WriteLine("");
-        }
-
-        public void ShowInputPrompt()
-        {
-            Console.Write("Press any key to continue.");
-        }
-
+        
         public void ProcessInput(string userInput)
         {
-            ScreenManager.GetInstance().PopScreen();
+            ScreenManager.GetInstance().SetActivePresenter(new ReservationsScreen());
         }
     }
 }

@@ -26,7 +26,7 @@ namespace CaseStudy.Screens
                     break;
 
                 case MENU_RESERVATION:
-                    ScreenManager.GetInstance().PushScreen(new ReservationsScreen());
+                    ScreenManager.GetInstance().SetActivePresenter(new ReservationsScreen());
                     break;
 
                 case MENU_EXIT:

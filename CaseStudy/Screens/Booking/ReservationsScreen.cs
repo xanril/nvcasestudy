@@ -1,30 +1,23 @@
-﻿using CaseStudy.DataManagers;
+﻿using CaseStudy.Abstracts;
+using CaseStudy.DataManagers;
 using CaseStudy.Models;
 using CaseStudy.Screens;
+using CaseStudy.Views.Booking;
 using System;
 
 namespace CaseStudy.Screens.Booking
 {
-    class ReservationsScreen : IScreen
+    class ReservationsScreen : AbstractPresenter
     {
         private const string MENU_BOOK_FLIGHT = "1";
         private const string MENU_LIST_RESERVATIONS = "2";
         private const string MENU_SEARCH_PNR = "3";
         private const string MENU_BACK = "4";
 
-        public void Display()
+        public ReservationsScreen()
         {
-            Console.WriteLine("\nRESERVATIONS");
-            Console.WriteLine("[" + MENU_BOOK_FLIGHT + "] Book a Flight");
-            Console.WriteLine("[" + MENU_LIST_RESERVATIONS + "] List All Reservations");
-            Console.WriteLine("[" + MENU_SEARCH_PNR + "] Search By PNR");
-            Console.WriteLine("[" + MENU_BACK + "] Back to Main Menu");
-            Console.WriteLine("");
-        }
-
-        public void ShowInputPrompt()
-        {
-            Console.Write("Select Item: ");
+            this.view = new ReservationView(this);
+            ScreenManager.GetInstance().SetActiveView(this.view);
         }
 
         public void ProcessInput(string userInput)
@@ -32,29 +25,28 @@ namespace CaseStudy.Screens.Booking
             switch (userInput)
             {
                 case MENU_BOOK_FLIGHT:
-                    Console.WriteLine("Book a Flight selected.");
+                    this.view.ShowInputFeedback("Book a Flight selected.");
                     Reservation reservation = ReservationDataManager.Instance.CreateReservation();
                     ScreenManager.GetInstance().PushScreen(new SelectFlightScreen(reservation));
                     break;
 
                 case MENU_LIST_RESERVATIONS:
-                    Console.WriteLine("List All Reservations selected.");
-                    ListReservationsScreen listReservationsScreen = new ListReservationsScreen(ReservationDataManager.Instance.GetReservations());
-                    ScreenManager.GetInstance().PushScreen(listReservationsScreen);
+                    this.view.ShowInputFeedback("List All Reservations selected.");
+                    ScreenManager.GetInstance().SetActivePresenter(new ListReservationsScreen());
                     break;
 
                 case MENU_SEARCH_PNR:
-                    Console.WriteLine("Search By PNR selected.");
+                    this.view.ShowInputFeedback("Search By PNR selected.");
                     ScreenManager.GetInstance().PushScreen(new SearchPNRScreen());
                     break;
 
                 case MENU_BACK:
-                    Console.WriteLine("Back To Menu selected.\n");
-                    ScreenManager.GetInstance().PopScreen();
+                    this.view.ShowInputFeedback("Back To Menu selected.\n");
+                    ScreenManager.GetInstance().SetActivePresenter(new MenuScreen());
                     break;
 
                 default:
-                    Console.WriteLine("Cannot recognize menu item. Please try again.");
+                    this.view.SetErrorMessage("Cannot recognize menu item. Please try again.");
                     break;
             }
         }
