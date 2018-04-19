@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstracts\AbstractPresenter.cs" />
+    <Compile Include="Abstracts\AbstractView.cs" />
     <Compile Include="DataManagers\FlightDataManager.cs" />
     <Compile Include="DataManagers\ReservationDataManager.cs" />
     <Compile Include="Helpers\PNRGenerator.cs" />
@@ -72,10 +74,12 @@
     <Compile Include="Screens\Maintenance\SearchFlightScreen.cs" />
     <Compile Include="Screens\Maintenance\SearchMarketScreen.cs" />
     <Compile Include="Screens\Booking\SetFlightPassengersScreen.cs" />
+    <Compile Include="Views\MainMenuView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
