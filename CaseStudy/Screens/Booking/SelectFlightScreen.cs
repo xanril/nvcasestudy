@@ -54,7 +54,7 @@ namespace CaseStudy.Booking.Screens
                     Console.WriteLine("---------------------------------------------------");
                     Console.WriteLine("");
 
-                    reservation.flight = flight;
+                    reservation.TargetFlight = flight;
                     ScreenManager.GetInstance().PushScreen(new SetFlightPassengersScreen(reservation));
                 }
                 else

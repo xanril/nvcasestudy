@@ -7,39 +7,13 @@ namespace CaseStudy.Models
 {
     public class Passenger
     {
-        private string firstName;
-
         [Required]
         [StringLength(64, ErrorMessage = "First Name should have 64 characters maximum only.")]
-        public string FirstName
-        {
-            get { return firstName; }
-            set
-            {
-                ValidationHelperResult validationResult = ValidationHelper.ValidateProperty<Passenger>(this, nameof(FirstName), value);
-                if (validationResult.HasError)
-                    throw new Exception(validationResult.GetErrorMessages());
-
-                firstName = value;
-            }
-        }
-
-        private string lastName;
+        public string FirstName { get; set; }
 
         [Required]
         [StringLength(64, ErrorMessage = "Last Name should have 64 characters maximum only.")]
-        public string LastName
-        {
-            get { return lastName; }
-            set
-            {
-                ValidationHelperResult validationResult = ValidationHelper.ValidateProperty<Passenger>(this, nameof(LastName), value);
-                if (validationResult.HasError)
-                    throw new Exception(validationResult.GetErrorMessages());
-
-                lastName = value;
-            }
-        }
+        public string LastName { get; set; }
 
         private DateTime birthdate;
         public DateTime Birthdate
@@ -47,10 +21,6 @@ namespace CaseStudy.Models
             get { return birthdate; }
             set
             {
-                // check if birthdate is a future date
-                if(value >= DateTime.Today)
-                    throw new Exception("Birthdate should be a past date.");
-
                 birthdate = value;
                 CalculateAge();
             }
@@ -65,7 +35,7 @@ namespace CaseStudy.Models
 
         public Passenger()
         {
-            firstName = "A";
+            FirstName = "A";
             LastName = "B";
 
             // makes sure that initial value of birthdate is always in the past.

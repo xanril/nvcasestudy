@@ -22,7 +22,7 @@ namespace CaseStudy.Booking.Screens
 
             if (this.reservations.Count<Reservation>() == 0)
             {
-                Console.WriteLine("No Reservation records found.\n");
+                Console.WriteLine("No Reservation records found.");
             }
             else
             {
