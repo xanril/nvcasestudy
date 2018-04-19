@@ -22,7 +22,7 @@ namespace CaseStudy.Helpers
     public class ValidationHelperResult
     {
         public IEnumerable<ValidationResult> Results { get; private set; }
-        public bool IsValid
+        public bool HasError
         {
             get { return Results.Count<ValidationResult>() > 0; }
         }

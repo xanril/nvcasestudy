@@ -17,7 +17,7 @@ namespace CaseStudy.Models
             set
             {
                 ValidationHelperResult validationResult = ValidationHelper.ValidateProperty<Passenger>(this, nameof(FirstName), value);
-                if (validationResult.IsValid)
+                if (validationResult.HasError)
                     throw new Exception(validationResult.GetErrorMessages());
 
                 firstName = value;
@@ -34,7 +34,7 @@ namespace CaseStudy.Models
             set
             {
                 ValidationHelperResult validationResult = ValidationHelper.ValidateProperty<Passenger>(this, nameof(LastName), value);
-                if (validationResult.IsValid)
+                if (validationResult.HasError)
                     throw new Exception(validationResult.GetErrorMessages());
 
                 lastName = value;
