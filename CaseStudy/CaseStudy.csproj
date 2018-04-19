@@ -61,6 +61,7 @@
     <Compile Include="Screens\Booking\ReservationsScreen.cs" />
     <Compile Include="Screens\Booking\SearchPNRScreen.cs" />
     <Compile Include="Screens\Booking\SelectFlightScreen.cs" />
+    <Compile Include="Screens\Maintenance\ConfirmNewFlightScreen.cs" />
     <Compile Include="Screens\Maintenance\SetNewFlightScreen.cs" />
     <Compile Include="Screens\Maintenance\FlightMaintenanceScreen.cs" />
     <Compile Include="Screens\IScreen.cs" />
