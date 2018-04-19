@@ -5,7 +5,7 @@ using System;
 
 namespace CaseStudy.Screens.Maintenance
 {
-    class SetNewFlightScreen : IScreen
+    class CreateNewFlightScreen : IScreen
     {
         private enum CreateFlightStates
         {
@@ -19,7 +19,7 @@ namespace CaseStudy.Screens.Maintenance
         private Flight flight;
         private CreateFlightStates currState;
 
-        public SetNewFlightScreen(Flight flight)
+        public CreateNewFlightScreen(Flight flight)
         {
             this.flight = flight;
             currState = CreateFlightStates.StateGetAirlineCode;
