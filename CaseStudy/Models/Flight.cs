@@ -44,13 +44,13 @@ namespace CaseStudy.Models
 
         [Required(ErrorMessage = "Arrival Station should have a value.")]
         [StringLength(3, MinimumLength = 3, ErrorMessage ="Arrival Station should have 3-character length.")]
-        // TODO: add regex to accept alpha chars only?
+        [RegularExpression("([a-zA-Z])+", ErrorMessage = "Arrival Station should only be composed of letters.")]
         public string ArrivalStation { get; set; }
 
         private string departureStation;
         [Required(ErrorMessage = "Departure Station should have a value.")]
         [StringLength(3, MinimumLength = 3, ErrorMessage = "Departure Station should have 3-character length.")]
-        // TODO: add regex to accept alpha chars only?
+        [RegularExpression("([a-zA-Z])+", ErrorMessage = "Departure Station should only be composed of letters.")]
         public string  DepartureStation
         {
             get { return departureStation; }
