@@ -37,7 +37,7 @@ namespace CaseStudy.Screens.Booking
 
                 case MENU_SEARCH_PNR:
                     this.view.ShowInputFeedback("Search By PNR selected.");
-                    ScreenManager.GetInstance().PushScreen(new SearchPNRScreen());
+                    ScreenManager.GetInstance().SetActivePresenter(new SearchPNRScreen());
                     break;
 
                 case MENU_BACK:

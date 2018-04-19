@@ -76,6 +76,7 @@
     <Compile Include="Screens\Booking\SetFlightPassengersScreen.cs" />
     <Compile Include="Views\Booking\ListReservationsView.cs" />
     <Compile Include="Views\Booking\ReservationView.cs" />
+    <Compile Include="Views\Booking\SearchPNRView.cs" />
     <Compile Include="Views\MainMenuView.cs" />
     <Compile Include="Views\Maintenance\ConfirmNewFlightView.cs" />
     <Compile Include="Views\Maintenance\CreateNewFlightView.cs" />

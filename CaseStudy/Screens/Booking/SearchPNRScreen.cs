@@ -1,30 +1,25 @@
-﻿using CaseStudy.DataManagers;
+﻿using CaseStudy.Abstracts;
+using CaseStudy.DataManagers;
 using CaseStudy.Helpers;
 using CaseStudy.Models;
 using CaseStudy.Screens;
+using CaseStudy.Views.Booking;
 using System;
 
 namespace CaseStudy.Screens.Booking
 {
-    class SearchPNRScreen : IScreen
+    class SearchPNRScreen : AbstractPresenter
     {
         private const string KEY_BACK_TO_MENU = "X";
         private Reservation tempReservation;
 
         public SearchPNRScreen()
         {
+            this.view = new SearchPNRView(this);
+            ScreenManager.GetInstance().SetActiveView(this.view);
             tempReservation = ReservationDataManager.Instance.CreateReservation();
         }
 
-        public void Display()
-        {
-            Console.WriteLine("\nRESERVATIONS > SEARCH BY PNR");
-        }
-
-        public void ShowInputPrompt()
-        {
-            Console.Write("PNR: ");
-        }
 
         public void ProcessInput(string userInput)
         {
@@ -33,7 +28,7 @@ namespace CaseStudy.Screens.Booking
   
             if (ValidationHelper.IsFirstCharacterLetter(userInput) == false)
             {
-                Console.WriteLine("First character should always be a letter.");
+                this.view.SetErrorMessage("First character should always be a letter.");
                 return;
             }
 
@@ -41,7 +36,7 @@ namespace CaseStudy.Screens.Booking
             validationResult = ValidationHelper.ValidateProperty<Reservation>(tempReservation, nameof(tempReservation.PNR), userInput);
             if(validationResult.HasError)
             {
-                Console.Write(validationResult.GetErrorMessages());
+                this.view.SetErrorMessage(validationResult.GetErrorMessages());
                 return;
             }
 
@@ -49,17 +44,15 @@ namespace CaseStudy.Screens.Booking
             
             if(reservation == null)
             {
-                Console.WriteLine("No Reservation record exists for PNR {0}.", userInput);
-                ScreenManager.GetInstance().PopScreen();
+                this.view.ShowInputFeedback(string.Format("No Reservation record exists for PNR {0}.", userInput));
+                ScreenManager.GetInstance().SetActivePresenter(new ReservationsScreen());
             }
             else
             {
-                Console.WriteLine("Reservation record found.");
-                Console.WriteLine("---------------------------------------------------");
-                Console.Write(reservation.ToString());
-                Console.WriteLine("---------------------------------------------------");
+                SearchPNRView actualView = (SearchPNRView)this.view;
+                actualView.ShowPNRInfo(reservation);
 
-                ScreenManager.GetInstance().PopScreen();
+                ScreenManager.GetInstance().SetActivePresenter(new ReservationsScreen());
             }
         }
     }
