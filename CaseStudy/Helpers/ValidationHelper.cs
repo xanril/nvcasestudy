@@ -17,6 +17,22 @@ namespace CaseStudy.Helpers
 
             return new ValidationHelperResult(validationResults);
         }
+
+        public static bool IsPastDate(DateTime dateToCheck)
+        {
+            if (dateToCheck >= DateTime.Today)
+                return false;
+
+            return true;
+        }
+
+        public static bool IsFutureDate(DateTime dateToCheck)
+        {
+            if (dateToCheck <= DateTime.Today)
+                return false;
+
+            return true;
+        }
     }
 
     public class ValidationHelperResult
