@@ -47,7 +47,7 @@ namespace CaseStudy.Models
 
         public override string ToString()
         {
-            return this.LastName + ", " + this.FirstName + "\t" + Birthdate.ToShortDateString();
+            return this.LastName + ", " + this.FirstName + " - " + Birthdate.ToShortDateString() + " Age " + age;
         }
 
         private void CalculateAge()
