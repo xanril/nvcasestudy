@@ -28,7 +28,6 @@ namespace CaseStudy.Views
 
         public override void ShowInputPrompt()
         {
-            base.ShowInputPrompt();
             Console.Write("Select Item: ");
         }
 

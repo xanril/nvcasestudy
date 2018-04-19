@@ -1,46 +1,37 @@
-﻿using CaseStudy.DataManagers;
+﻿using CaseStudy.Abstracts;
+using CaseStudy.DataManagers;
 using CaseStudy.Models;
+using CaseStudy.Views.Maintenance;
 using System;
 
 namespace CaseStudy.Screens.Maintenance
 {
-    class FlightMaintenanceScreen : IScreen
+    public class FlightMaintenanceScreen : AbstractPresenter
     {
         private const string MENU_ADD_FLIGHT = "1";
         private const string MENU_SEARCH_FLIGHT = "2";
         private const string MENU_BACK = "3";
 
-        public void Display()
+        public FlightMaintenanceScreen()
         {
-            Console.WriteLine("\nFLIGHT MAINTENANCE");
-            Console.WriteLine("[" + MENU_ADD_FLIGHT + "] Add Flight");
-            Console.WriteLine("[" + MENU_SEARCH_FLIGHT + "] Search Flight");
-            Console.WriteLine("[" + MENU_BACK + "] Back to Main Menu");
-            Console.WriteLine("");
+            this.view = new FlightMaintenanceView(this);
+            ScreenManager.GetInstance().SetActiveView(this.view);
         }
 
-        public void ShowInputPrompt()
-        {
-            Console.Write("Select Item: ");
-        }
-
-        public void ProcessInput(string userInput)
+        public void MenuSelected(string userInput)
         {
             switch (userInput)
             {
                 case MENU_ADD_FLIGHT:
-                    Console.WriteLine("Add Flight selected.");
-                    Flight newFlight = FlightDataManager.Instance.CreateFlight();
-                    ScreenManager.GetInstance().PushScreen(new SetNewFlightScreen(newFlight));
+                    //Flight newFlight = FlightDataManager.Instance.CreateFlight();
+                    //ScreenManager.GetInstance().PushScreen(new SetNewFlightScreen(newFlight));
                     break;
 
                 case MENU_SEARCH_FLIGHT:
-                    Console.WriteLine("Search Flight selected.");
-                    ScreenManager.GetInstance().PushScreen(new SearchFlightScreen());
+                    ScreenManager.GetInstance().SetActivePresenter(new SearchFlightScreen());
                     break;
 
                 case MENU_BACK:
-                    Console.WriteLine("Back To Menu selected.");
                     ScreenManager.GetInstance().PopScreen();
                     break;
 

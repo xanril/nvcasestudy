@@ -19,6 +19,7 @@ namespace CaseStudy.Screens
 
         private Stack<AbstractView> viewStack;
         private AbstractView activeView;
+        private AbstractPresenter activePresenter;
 
         private ScreenManager()
         {
@@ -39,10 +40,16 @@ namespace CaseStudy.Screens
             this.activeView.Display();
         }
 
+        public void SetActivePresenter(AbstractPresenter presenter)
+        {
+            this.activePresenter = presenter;
+        }
+
         public void ShowScreen()
         {
             do
             {
+                this.activeView.ShowError();
                 this.activeView.ShowInputPrompt();
                 string userInput = Console.ReadLine();
                 this.activeView.ReadInput(userInput);
@@ -52,12 +59,12 @@ namespace CaseStudy.Screens
 
         public void PopScreen()
         {
-            //this.viewStack.Pop();
-            //if (viewStack.Count > 0)
-            //{
-            //    this.activeView = this.viewStack.Peek();
-            //    this.activeView.Display();
-            //}
+            this.viewStack.Pop();
+            if (viewStack.Count > 0)
+            {
+                this.activeView = this.viewStack.Peek();
+                this.activeView.Display();
+            }
         }
 
         public void PopScreenUntilTargetType(Type ofType)

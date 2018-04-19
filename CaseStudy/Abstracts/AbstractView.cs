@@ -15,17 +15,14 @@ namespace CaseStudy.Abstracts
 
         public virtual void ShowError()
         {
+            if (string.IsNullOrEmpty(errorMessage))
+                return;
+
             Console.WriteLine(errorMessage);
             errorMessage = string.Empty;
         }
 
-        public virtual void ShowInputPrompt()
-        {
-            if (string.IsNullOrEmpty(errorMessage) == false)
-                ShowError();
-        }
-
-        
+        abstract public void ShowInputPrompt();
 
         public void SetErrorMessage(string errorMessage)
         {

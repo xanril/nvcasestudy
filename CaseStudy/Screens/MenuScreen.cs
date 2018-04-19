@@ -22,7 +22,7 @@ namespace CaseStudy.Screens
             switch (userInput)
             {
                 case MENU_FLIGHT_MAINTENANCE:
-                    ScreenManager.GetInstance().PushScreen(new FlightMaintenanceScreen());
+                    ScreenManager.GetInstance().SetActivePresenter(new FlightMaintenanceScreen());
                     break;
 
                 case MENU_RESERVATION:

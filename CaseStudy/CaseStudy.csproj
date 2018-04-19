@@ -75,6 +75,8 @@
     <Compile Include="Screens\Maintenance\SearchMarketScreen.cs" />
     <Compile Include="Screens\Booking\SetFlightPassengersScreen.cs" />
     <Compile Include="Views\MainMenuView.cs" />
+    <Compile Include="Views\Maintenance\FlightMaintenanceView.cs" />
+    <Compile Include="Views\Maintenance\SearchFlightView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
