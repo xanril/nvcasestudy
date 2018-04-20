@@ -68,8 +68,10 @@ namespace CaseStudy.Screens.Booking
                     int passengerCount = 0;
                     if(int.TryParse(userInput, out passengerCount))
                     {
-                        if(passengerCount > 5)
+                        if (passengerCount > 5)
                             Console.WriteLine("Passenger count should not be more than 5");
+                        else if (passengerCount <= 0)
+                            Console.WriteLine("Passenger count cannot be 0.");
                         else
                         {
                             this.targetPassengerCount = passengerCount;
