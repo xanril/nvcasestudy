@@ -12,7 +12,7 @@ namespace CaseStudy
             FlightDataManager.Instance.LoadData();
             ReservationDataManager.Instance.LoadData();
 
-            Console.WriteLine("Welcome to Airline X Flight Management System!");
+            Console.WriteLine("Welcome to ResAIRvation Flight Management System!");
             Console.WriteLine("");
 
             ScreenManager.GetInstance().Initialize();
